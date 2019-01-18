@@ -1,0 +1,176 @@
+<!-- Statistiques -->
+<div class="container>">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Recherche avancée</label></h4>
+            <!-- Recherche par date -->
+            <div class="panel panel-primary">
+                <div class="panel-body backgroundColor">
+                    <div class="form-group col-md-4">
+                        <label>
+                            <span class="label label-primary">Par date</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" class="form-control" ng-model="inputDate"
+                                   ui-mask="99/99/9999">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>&nbsp;</label>
+                        <button class="form-control btn btn-success" type="button"
+                                ng-click="searchDate(inputDate)"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+            </div>
+            <!-- Recherche par victime -->
+            <div class="panel panel-primary">
+                <div class="panel-body backgroundColor">
+                    <div class="form-group col-md-4">
+                        <label>
+                            <span class="label label-primary">Par nom de victime</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            <input type="text" class="form-control" ng-model="inputVictime">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>&nbsp;</label>
+                        <button class="form-control btn btn-success" type="button"
+                                ng-click="searchVictime(inputVictime)"><span class="glyphicon glyphicon-search"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Résultats -->
+    <div class="row">
+        <div class="col-md-12" ng-show="isVisibleDate">
+            <h4><label class="label label-primary">Résultats par date</label></h4>
+            <table class="table table-striped table-condensed col-md-12">
+                <tr>
+                    <th class="col-md-1">Date</th>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-1">Pv</th>
+                    <th class="col-md-4">Activité</th>
+                    <th class="col-md-3">Lieu</th>
+                    <th class="col-md-2"></th>
+                </tr>
+                <tr ng-repeat="detail in resultsDate">
+                    <td class="col-md-1">
+                        <a href="" ng-click="detailsDate(detail.id)">
+                            {{detail.alerte_gdh | dateToISO | date:'dd/MM/yyyy'}}
+                        </a>
+                    </td>
+                    <td class="col-md-1">
+                        {{detail.id}}
+                    </td>
+                     <td class="col-md-1">
+                        {{detail.pv}}
+                    </td>
+                    <td class="col-md-4">
+                        {{detail.acc_activites | dataToActivites}}
+                    </td>
+                    <td class="col-md-3">
+                        {{detail.loc_lieu}}
+                    </td>
+                     <td class="col-md-2">
+                        {{detail.loc_complement}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-10" ng-show="isVisibleDateDetails">
+            <h4><label class="label label-primary">Détails</label></h4>
+            <table class="table table-striped table-condensed col-md-10">
+                <tr>
+                    <th class="col-md-2">Nom</th>
+                    <th class="col-md-2">Prénom</th>
+                    <th class="col-md-2">Etat</th>
+                    <th class="col-md-4">Blessures</th>
+                </tr>
+                <tr ng-repeat="victime in dateDetails">
+                    <td class="col-md-2">
+                        {{victime.nom}}
+                    </td>
+                    <td class="col-md-2">
+                        {{victime.prenom}}
+                    </td>
+                    <td class="col-md-2">
+                        {{victime.etat}}
+                    </td>
+                    <td class="col-md-4">
+                        {{victime.blessures | displayBlessures}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="col-md-12" ng-show="isVisibleResults">
+            <h4><label class="label label-primary">Résultats par nom</label></h4>
+            <table class="table table-striped table-condensed col-md-12">
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-2">Nom</th>
+                    <th class="col-md-2">Prénom</th>
+                    <th class="col-md-2">Etat</th>
+                    <th class="col-md-4">Blessures</th>
+                </tr>
+                <tr ng-repeat="victime in resultsVictime">
+                    <td class="col-md-1">
+                        {{victime.secours_id}}
+                    </td>
+                    <td class="col-md-2">
+                        <a href="" ng-click="detailsResults(victime.secours_id)">{{victime.nom}}</a>
+                    </td>
+                    <td class="col-md-2">
+                        {{victime.prenom}}
+                    </td>
+                    <td class="col-md-2">
+                        {{victime.etat}}
+                    </td>
+                    <td class="col-md-4">
+                        {{victime.blessures | displayBlessures}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11" ng-show="isVisibleDetailsResults">
+            <h4><label class="label label-primary">Détails</label></h4>
+            <table class="table table-striped table-condensed col-md-11">
+                <tr>
+                    <th class="col-md-1">Date</th>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-1">Pv</th>
+                    <th class="col-md-4">Activité</th>
+                    <th class="col-md-4">Lieu</th>
+                </tr>
+                <tr ng-repeat="detail in details">
+                    <td class="col-md-1">
+                        {{detail.alerte_gdh | dateToISO | date:'dd/MM/yyyy'}}
+                    </td>
+                    <td class="col-md-1">
+                        {{detail.id}}
+                    </td>
+                     <td class="col-md-1">
+                        {{detail.pv}}
+                    </td>
+                    <td class="col-md-4">
+                        {{detail.acc_activites | dataToActivites}}
+                    </td>
+                    <td class="col-md-4">
+                        {{detail.loc_lieu}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+                        

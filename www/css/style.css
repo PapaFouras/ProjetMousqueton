@@ -1,0 +1,37 @@
+.backgroundColor {background-color: #eaf5fc;};
+
+#panelVictimes {margin: 0px;}
+
+#Num {
+    text-align: center;
+    width: 50px;
+}
+
+#inputSearch {width: 80px;}
+
+#buttonAdd {width: 55px;}
+  
+#deroulementButton {
+    text-align: left;
+    width: 134px;
+}
+
+#addButton {width: 170px;}
+
+.alignCenter {text-align: center;}
+
+.inputEditing {width: 100%;}
+
+#ui-selectBlessures {min-height: 37px;}
+/*#ui-selectActivites {min-height: 37px;}*/
+
+#formBtn {margin-top: 15px;}
+
+/* Marges pour le corps du document HTML*/
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Patch pour BootStrap UI*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

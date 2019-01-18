@@ -1,0 +1,97 @@
+<!-- Statistiques -->
+<div class="container>">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Liste des secours effectués par personnel</label></h4>
+            <!-- Secours par personnel -->
+            <div class="panel panel-primary">
+                <div class="panel-body backgroundColor">
+                    <div class="form-group col-md-2">
+                        <label>
+                            <span class="label label-primary">Année</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="number" class="form-control" ng-model="anneeLstSecours">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            <span class="label label-primary">Personnel</span>
+                        </label>
+                        <select ng-model="personnelLstSecours" class="form-control"
+                                ng-options="item.nom as item.nom
+                                            for item in lstPersonnels
+                                            | filter: {type: 'Secouriste'}
+                                            | orderBy: 'nom'">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>&nbsp;</label>
+                        <button class="form-control btn btn-success" type="button"
+                                ng-click="statLstSecours()">Générer le PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Synthèse des secours par emprise</label></h4>
+            <!-- Synthèse des secours -->
+            <div class="panel panel-primary">
+                <div class="panel-body backgroundColor">
+                    <!-- Date de début -->
+                    <div class="form-group col-md-2">
+                        <label>
+                            <span class="label label-primary">Date de début</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" class="form-control" ng-model="dateDebutSynthese"
+                                   ui-mask="99/99/9999">
+                        </div>
+                    </div>
+                    <!-- Date de fin -->
+                    <div class="form-group col-md-2">
+                        <label>
+                            <span class="label label-primary">Date de fin</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" class="form-control" ng-model="dateFinSynthese"
+                                   ui-mask="99/99/9999">
+                        </div>
+                    </div>
+                    <!-- Emprise -->
+                    <div class="form-group col-md-2">
+                        <label>
+                            <span class="label label-primary">Emprise</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-filter"></span>
+                            </span>
+                                    <select class="form-control"
+                                    ng-model="zone"
+                                    ng-options="item for item in lstZone">
+                                </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Boutton PDF -->
+                    <div class="form-group col-md-2 col-md-offset-2">
+                        <label>&nbsp;</label>
+                        <button class="form-control btn btn-success" type="button"
+                                ng-click="statSynthesePdf(dateDebutSynthese, dateFinSynthese, zone)">Générer le PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                        

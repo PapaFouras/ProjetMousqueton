@@ -1,0 +1,491 @@
+<!-- Alerte -->
+<div class="container>">
+<form name="formAlerte">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+                <label>
+                <span class="label label-primary" ng-click="isVisibleAlerte = !isVisibleAlerte">
+                <span class="glyphicon glyphicon-chevron-right" ng-show="isVisibleAlerte"></span>
+                <span class="glyphicon glyphicon-chevron-down" ng-hide="isVisibleAlerte"></span>
+                Alerte
+                </span>
+                </label>
+            </h4>
+            <div class="panel panel-primary" ng-hide="isVisibleAlerte">
+                <div class="panel-body backgroundColor">
+                    <div class="row"> <!-- Début de row 2-->
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Date et heure de l'alerte</span></label>
+                            <p class="input-group">
+                                <input type="text" class="form-control" ng-model="dataSecours.data.alerte_gdh"
+                                       name="inputGdh" date-display ui-mask="99/99/9999 99:99"
+                                       ng-blur="updateDateAlerte('alerte_gdh', dataSecours.data.alerte_gdh)">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </p>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><span class="label label-primary">Moyens d'alerte</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                <input type="radio" name="moyenAlerte" value="Téléphone"
+                                       ng-model="dataSecours.data.alerte_moyen"
+                                       ng-click="updateFiche('alerte_moyen', dataSecours.data.alerte_moyen)"> Téléphone
+                                </label>
+                                <label class="radio-inline">
+                                 <input type="radio" name="moyenAlerte" value="Radio"
+                                       ng-model="dataSecours.data.alerte_moyen"
+                                       ng-click="updateFiche('alerte_moyen', dataSecours.data.alerte_moyen)"> Radio
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-md-offset-1">
+                            <label>
+                                <span class="label label-primary">Nom du requérant</span>
+                            </label>
+                            <input type="text" class="form-control"
+                                   ng-model="dataSecours.data.requerant" capitalize-first
+                                   ng-blur="updateFiche('requerant', dataSecours.data.requerant)">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <span class="label label-primary">Téléphone</span>
+                                <small>&nbsp;<span class="glyphicon glyphicon-globe"></span></small>
+                                <input type="checkbox"
+                                   ng-checked="dataSecours.data.chk_tph  == 1"
+                                   ng-click="updateChkTph('chk_tph')">
+                            </label>
+                            <p class="input-group" ng-hide="dataSecours.data.chk_tph  == 1">
+                                <input type="text" class="form-control"
+                                       ng-model="dataSecours.data.tph_nat"
+                                       ng-blur="updateFiche('tph_nat', dataSecours.data.tph_nat)"
+                                       ng-disabled="dataSecours.data.chk_tph  == 1"
+                                       ui-mask="+33(9)9.99.99.99.99">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                            </p>
+                            <p class="input-group" ng-show="dataSecours.data.chk_tph  == 1">
+                                <input type="text" class="form-control"
+                                       ng-model="dataSecours.data.tph_intl"
+                                       ng-blur="updateFiche('tph_intl', dataSecours.data.tph_intl)"
+                                       placeholder="Exemple Italie +39 ....">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                            </p>
+                        </div>
+                    </div> <!-- Fin de row 2-->
+                    <div class="row"> <!-- Début de row 3-->
+
+                        <div class="form-group col-md-2">
+                          <label><span class="label label-primary">Type</span></label>
+                                <select ng-model="dataSecours.data.inter" class="form-control"
+                                    ng-options="item for item in lstInter"
+                                    ng-change="updateFiche('inter', dataSecours.data.inter)">
+                                </select>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label><span class="label label-primary">Origine de l'alerte</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                <input type="radio" name="origineAlerte" value="CODIS"
+                                        ng-model="dataSecours.data.alerte_origine"
+                                        ng-click="updateFiche('alerte_origine', dataSecours.data.alerte_origine)"> CODIS
+                                </label>
+                                <label class="radio-inline">
+                                <input type="radio" name="origineAlerte" value="SAMU"
+                                       ng-model="dataSecours.data.alerte_origine"
+                                       ng-click="updateFiche('alerte_origine', dataSecours.data.alerte_origine)"> SAMU
+                                </label>
+                                <label class="radio-inline">
+                                <input type="radio" name="origineAlerte" value="CORG"
+                                       ng-model="dataSecours.data.alerte_origine"
+                                       ng-click="updateFiche('alerte_origine', dataSecours.data.alerte_origine)"> CORG
+                                </label>
+                                <label class="radio-inline">
+                                <input type="radio" name="origineAlerte" value="PGHM"
+                                       ng-model="dataSecours.data.alerte_origine"
+                                       ng-click="updateFiche('alerte_origine', dataSecours.data.alerte_origine)"> PGHM
+                                </label>
+                                <label class="radio-inline">
+                                <input type="radio" name="origineAlerte" value="Requérant"
+                                       ng-model="dataSecours.data.alerte_origine"
+                                       ng-click="updateFiche('alerte_origine', dataSecours.data.alerte_origine)"> Autre
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label>
+                                <span class="label label-primary">Conférence(s)</span>
+                                <input type="checkbox"
+                                       ng-checked="dataSecours.data.chk_conf3  == 1"
+                                       ng-click="updateChkConf('chk_conf3')">
+                            </label>
+                            <div ng-show="dataSecours.data.chk_conf3  == 1">
+                                <label class="checkbox-inline">
+                                <input type="checkbox" ng-true-value="'CODIS'" ng-false-value="''"
+                                       ng-model="dataSecours.data.chk_confCodis"
+                                       ng-click="updateFiche('chk_confCodis', dataSecours.data.chk_confCodis)"> CODIS
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox" ng-true-value="'SMUR'" ng-false-value="''"
+                                       ng-model="dataSecours.data.chk_confSamu"
+                                       ng-click="updateFiche('chk_confSamu', dataSecours.data.chk_confSamu)"> SAMU
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox" ng-true-value="'CORG'" ng-false-value="''"
+                                       ng-model="dataSecours.data.chk_confCorg"
+                                       ng-click="updateFiche('chk_confCorg', dataSecours.data.chk_confCorg)"> CORG
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox" ng-true-value="'PGHM'" ng-false-value="''"
+                                       ng-model="dataSecours.data.chk_confPghm"
+                                       ng-click="updateFiche('chk_confPghm', dataSecours.data.chk_confPghm)"> PGHM
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox" ng-true-value="'Autre'" ng-false-value="''"
+                                       ng-model="dataSecours.data.chk_confRequerant"
+                                       ng-click="updateFiche('chk_confRequerant', dataSecours.data.chk_confRequerant)"> Requérant
+                                </label>
+                            </div>
+                        </div>
+                    </div> <!-- Fin de row 2-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+                <label>
+                <span class="label label-primary" ng-click="isVisibleAlerte = !isVisibleAlerte">
+                <span class="glyphicon glyphicon-chevron-right" ng-show="isVisibleAlerte"></span>
+                <span class="glyphicon glyphicon-chevron-down" ng-hide="isVisibleAlerte"></span>
+                Accident
+                </span>
+                </label>
+            </h4>
+            <div class="panel panel-primary" ng-hide="isVisibleAlerte">
+                <div class="panel-body backgroundColor">
+                    <div class="row"> <!-- Début de row 1-->
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Date et heure de l'accident</span></label>
+                            <p class="input-group">
+                                <input type="text" class="form-control" ng-model="dataSecours.data.acc_gdh"
+                                       date-display ui-mask="99/99/9999 99:99"
+                                       ng-blur="updateDateAlerte('acc_gdh', dataSecours.data.acc_gdh)">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </p>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Activités</span></label>
+                            <ui-select ng-model="activites.selected" id="ui-selectActivites"
+                                       ng-change="updateListe('acc_activites', activites.selected)"
+                                       on-select="updateUiSelect_activites(activites.selected)">
+                                <ui-select-match placeholder="Selectionnez une activité...">
+                                    {{$select.selected.activites}}
+                                </ui-select-match>
+                                <ui-select-choices group-by="'categorie'"
+                                                   repeat="activites in availableActivites | filter:$select.search">
+                                    {{activites.activites}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form_group col-md-3">
+                            <label><span class="label label-primary">Météorologie</span></label>
+                            <select ng-model="dataSecours.data.meteo" class="form-control"
+                                    ng-options="item for item in lstMeteo"
+                                    ng-change="updateFiche('meteo', dataSecours.data.meteo)">
+                            </select>
+                        </div>
+                        <div class="form_group col-md-3">
+                            <label><span class="label label-primary">Vent</span></label>
+                            <select ng-model="dataSecours.data.vent" class="form-control"
+                                    ng-options="item for item in lstVent"
+                                    ng-change="updateFiche('vent', dataSecours.data.vent)">
+                            </select>
+                        </div>
+                    </div> <!-- Fin de row 1-->
+                    <div class="row"> <!-- Début de row 2-->
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Blessures</span></label>
+                            <ui-select ng-model="blessures.selected" id="ui-selectBlessures"
+                                      ng-change="updateListe('acc_blessures', blessures.selected)"
+                                      on-select="updateUiSelect_blessures(blessures.selected)">
+                                <ui-select-match placeholder="Selectionnez une blessure...">
+                                    {{$select.selected.blessures}}
+                                </ui-select-match>
+                                <ui-select-choices group-by="'categorie'"
+                                      repeat="blessures in availableBlessures | filter:$select.search">
+                                    {{blessures.blessures}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><span class="label label-primary">Sexe</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                <input type="radio" name="sexe" value="M"
+                                       ng-model="dataSecours.data.acc_sexe"
+                                       ng-click="updateFiche('acc_sexe', dataSecours.data.acc_sexe)"> Homme
+                                </label>
+                                <label class="radio-inline">
+                                 <input type="radio" name="sexe" value="F"
+                                       ng-model="dataSecours.data.acc_sexe"
+                                       ng-click="updateFiche('acc_sexe', dataSecours.data.acc_sexe)"> Femme
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-md-offset-1">
+                            <label><span class="label label-primary">Bilan vital</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                <input type="radio" name="bilanVital" value="1"
+                                       ng-model="dataSecours.data.acc_bilan"
+                                       ng-click="updateFiche('acc_bilan', dataSecours.data.acc_bilan)"> Inconscience
+                                </label>
+                                <label class="radio-inline">
+                                <input type="radio" name="bilanVital" value="2"
+                                       ng-model="dataSecours.data.acc_bilan"
+                                       ng-click="updateFiche('acc_bilan', dataSecours.data.acc_bilan)"> Arrêt ventilatoire
+                                </label>
+                                <label class="radio-inline">
+                                <input type="radio" name="bilanVital" value="3"
+                                       ng-model="dataSecours.data.acc_bilan"
+                                       ng-click="updateFiche('acc_bilan', dataSecours.data.acc_bilan)"> Arrêt circulatoire
+                                </label>
+                                <label class="radio-inline">
+                                <input type="checkbox"
+                                       ng-checked="dataSecours.data.chk_hemorragie == 1"
+                                       ng-click="updateChkHemorragie('chk_hemorragie')"> Hémorragie
+                                </label>
+ 				<label class="radio-inline">
+                                <input type="checkbox"
+                                       ng-checked="dataSecours.data.chk_pci == 1"
+                                       ng-click="updateChkPci('chk_pci')"> PCI
+                                </label>
+ 				<label class="radio-inline">
+                                <input type="checkbox"
+                                       ng-checked="dataSecours.data.chk_hc == 1"
+                                       ng-click="updateChkHc('chk_hc')"> Haute cinétique
+                                </label>
+                            </div>
+                        </div>
+                    </div> <!-- Fin de row 2-->
+                    <div class="row"> <!-- Début de row 3-->
+                        <div class="form-group col-md-12">
+                            <label><span class="label label-primary">Renseignements divers</span></label>
+                            <textarea class="form-control" rows="3" ng-model="dataSecours.data.acc_rsgts"
+                                      placeholder="Renseignements complémentaires..." capitalize-first
+                                      ng-blur="updateFiche('acc_rsgts', dataSecours.data.acc_rsgts)">
+                            </textarea>
+                        </div>
+                    </div> <!-- Fin de row 3-->
+                    <div class="checkbox">
+                            <label><input type="checkbox"
+                                          ng-checked="dataSecours.data.chk_rech  == 1"
+                                          ng-click="updateChkRecherches('chk_rech')">
+                                En cas de recherche(s), cochez la case.</label>
+                        </div>
+                    <div class="row" ng-show="dataSecours.data.chk_rech  == 1"> <!-- Début de row 4-->
+                        <div class="form-group col-md-12">
+                            <label><span class="label label-primary">Véhicule(s)</span>
+                            </label>
+                            <textarea class="form-control" rows="3" ng-model="dataSecours.data.rech_vl"
+                                      placeholder="Immatriculation, marque, couleur, lieu de stationnement..."
+                                      capitalize-first
+                                      ng-blur="updateFiche('rech_vl', dataSecours.data.rech_vl)">
+                            </textarea>
+                        </div>
+                    </div> <!-- Fin de row 4-->
+                    <div class="row" ng-show="dataSecours.data.chk_rech  == 1"> <!-- Début de row 5-->
+                        <div class="form-group col-md-12">
+                            <label><span class="label label-primary">Description(s) vestimentaire(s)</span>
+                            </label>
+                            <textarea class="form-control" rows="3" ng-model="dataSecours.data.rech_pers"
+                                      placeholder="Homme/Femme, vêtements, descriptif, adresse..."
+                                      capitalize-first
+                                      ng-blur="updateFiche('rech_pers', dataSecours.data.rech_pers)">
+                            </textarea>
+                        </div>
+                    </div> <!-- Fin de row 5-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+                <label>
+                <span class="label label-primary" ng-click="isVisibleLocalisation = !isVisibleLocalisation">
+                <span class="glyphicon glyphicon-chevron-right" ng-show="isVisibleLocalisation"></span>
+                <span class="glyphicon glyphicon-chevron-down" ng-hide="isVisibleLocalisation"></span>
+                Localisation
+                </span>
+                </label>
+            </h4>
+            <div class="panel panel-primary" ng-hide="isVisibleLocalisation">
+                <div class="panel-body backgroundColor">
+                    <div class="row"> <!-- Début de row 1-->
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Lieu à rechercher</span></label>
+                            <div class="input-group">
+                                <form ng-submit="getLieux(searchLieuAccident)">
+                                    <span class="input-group-addon input-sm">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                    <input type="text" class="form-control input-sm"
+                                           ng-model="searchLieuAccident">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info btn-sm" type="submit" ng-controller="listeLieuxCtrl"
+                                                ng-click="getLieux(searchLieuAccident)">OK</button>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="form group col-md-3">
+                            <label><span class="label label-primary">Cartographie</span></label>
+                            <div class="btn-group">
+                            <button id="buttonAdd" type="button" class="btn btn-info btn-sm"
+                                    ng-click="showMap()"
+                                    data-toggle="tooltip" title="Affichage de la cartographie">
+                                <span class="glyphicon glyphicon-globe"></span>
+                            </button>
+                            <button id="buttonAdd" type="button" class="btn btn-info btn-sm"
+                                    ng-click="importLieu()" ng-controller="dataLieuCtrl"
+                                    data-toggle="tooltip" title="Importation d'un lieu">
+                                <span class="glyphicon glyphicon-floppy-open"></span>
+                            </button>
+                            <button id="buttonAdd" type="button" class="btn btn-info btn-sm"
+                                    ng-click="gpsHelico()"
+                                    data-toggle="tooltip" title="Conversion des coordonnées GPS pour NMS hélicoptère">
+                                <span class="glyphicon glyphicon-plane"></span>
+                            </button>
+                            <button id="buttonAdd" type="button" class="btn btn-info btn-sm"
+                                    ng-click="gpsUtm()"
+                                    data-toggle="tooltip" title="Coordonnées UTM">
+                                <span class="glyphicon glyphicon-screenshot"></span>
+                            </button>
+                            </div>
+                        </div>
+                        
+                    </div> <!-- Fin de row 1-->
+                    <div class="row"> <!-- Début de row 2-->
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Lieu de l'accident</span></label>
+                            <input type="text" class="form-control input-sm"
+                                   ng-model="dataSecours.data.loc_lieu" readonly>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label><span class="label label-primary">Altitude</span></label>
+                            <input type="text" class="form-control input-sm" 
+                                   ng-model="dataSecours.data.loc_alt" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Coordonnées WGS84</span></label>
+                            <input type="text" class="form-control input-sm" ui-mask="N 99.999999° - E 9.999999°"
+                                   ng-model="dataSecours.data.loc_gps" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label><span class="label label-primary">Commune</span></label>
+                            <input type="text" class="form-control input-sm"
+                                   ng-model="dataSecours.data.loc_commune" readonly>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label><span class="label label-primary">Massif</span></label>
+                            <input type="text" class="form-control input-sm"
+                                   ng-model="dataSecours.data.loc_massif" readonly>
+                        </div>
+                    </div> <!-- Fin de row 2-->
+                    <div class="row"> <!-- Début de row 3-->
+                        <div class="form-group col-md-12">
+                            <label><span class="label label-primary">Complément de localisation</span></label>
+                            <input type="text" class="form-control input-sm" ng-model="dataSecours.data.loc_complement"
+                                   placeholder="Nom de la voie, quadrillage station, etc..." capitalize-first
+                                   ng-blur="updateFiche('loc_complement', dataSecours.data.loc_complement)">
+                        </div>
+                    </div> <!-- Début de row 3-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+                <label>
+                <span class="label label-primary" ng-click="isVisibleGestion = !isVisibleGestion">
+                <span class="glyphicon glyphicon-chevron-right" ng-hide="!isVisibleGestion"></span>
+                <span class="glyphicon glyphicon-chevron-down" ng-show="!isVisibleGestion"></span>
+                Gestion du secours
+                </span>
+                </label>
+            </h4>
+            <div class="panel panel-primary" ng-show="!isVisibleGestion">
+                <div class="panel-body backgroundColor">
+                    <div class="row"> <!-- Début de row 1-->
+			<div class="col-md-2">
+                            <label><span class="label label-primary">Officier permanence</span></label>
+                            <select ng-model="dataSecours.data.op" class="form-control input-sm"
+                                    ng-options="item.nom as item.nom
+                                                for item in lstPersonnels
+                                                | filter: {op:true}
+                                                | orderBy: 'grade'"
+                                    ng-change="updateFiche('op', dataSecours.data.op)">
+                            </select>
+                        </div>                        
+			<div class="col-md-2">
+                            <label><span class="label label-primary">Chef de salle</span></label>
+                            <select ng-model="dataSecours.data.gp" class="form-control input-sm"
+                                    ng-options="item.nom as item.nom
+                                                for item in lstPersonnels
+                                                | filter: {type: 'Secouriste'}
+                                                | orderBy: 'nom'"
+                                    ng-change="updateFiche('gp', dataSecours.data.gp)">
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label><span class="label label-primary">Planton</span></label>
+                            <select ng-model="dataSecours.data.planton" class="form-control input-sm"
+                                    ng-options="item.nom as item.nom
+                                                for item in lstPersonnels
+                                                | filter: {grade: 'GAV'}
+                                                | orderBy: 'nom'"
+                                    ng-change="updateFiche('planton', dataSecours.data.planton)">
+                            </select>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <label><span class="label label-primary">PV N°</span></label>
+                            <input type="text" class="form-control text-center input-sm"
+                                   ng-model="dataSecours.data.pv"
+                                   ng-blur="updateFiche('pv', dataSecours.data.pv)">
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <label><span class="label label-primary">Fiche N°</span></label>
+                            <input type="text" class="form-control text-center input-sm"
+                                   ng-model="dataSecours.data.fiche" readonly>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <label><span class="label label-primary">PULS</span></label>
+                            <input type="checkbox" 
+                                          ng-checked="dataSecours.data.chk_pulsar  == 1"
+                                          ng-click="updateChkPulsar('chk_pulsar')"  >
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <label><span class="label label-primary">BSM</span></label>
+                            <input type="checkbox" 
+                                          ng-checked="dataSecours.data.chk_bsm  == 1"
+                                          ng-click="updateChkBsm('chk_bsm')" >
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <label><span class="label label-primary">CRO</span></label>
+                            <input type="checkbox" 
+                                          ng-checked="dataSecours.data.chk_cro  == 1"
+                                          ng-click="updateChkCro('chk_cro')"  >
+                        </div>
+                    </div> <!-- Fin de row 1-->
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>

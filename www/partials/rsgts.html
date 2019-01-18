@@ -1,0 +1,119 @@
+<!-- Renseignements -->
+<div class="container>">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Commentaires</label></h4>
+            <div class="panel panel-primary">
+                <div class="panel-body backgroundColor">
+                    <form class="form-group">
+                        <label><span class="label label-primary">Mesures prises</span></label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mprelevage  == 1"
+                                        ng-click="updateCheckRelevage('chk_mprelevage')"> Relevage
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpcollier  == 1"
+                                        ng-click="updateCheckCollier('chk_mpcollier')"> Collier
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpattelle  == 1"
+                                        ng-click="updateCheckAttelle('chk_mpattelle')"> Attelle
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpked  == 1"
+                                        ng-click="updateCheckKed('chk_mpked')"> Ked
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpmid  == 1"
+                                        ng-click="updateCheckMid('chk_mpmid')"> Mid
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpperche  == 1"
+                                        ng-click="updateCheckPerche('chk_mpperche')"> Perche
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mptreuillage  == 1"
+                                        ng-click="updateCheckTreuillage('chk_mptreuillage')"> Treuillage
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpo2  == 1"
+                                        ng-click="updateCheckO2('chk_mpo2')"> O2
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox"
+                                        ng-checked="dataSecours.data.chk_mpmam  == 1"
+                                        ng-click="updateCheckMam('chk_mpmam')"> Aide médicalisation
+                                </label>
+                        <textarea class="form-control" rows="4" ng-model="dataSecours.data.rsgts_mp"
+                                  placeholder="Mesures prises..."
+                                  ng-blur="updateFiche('rsgts_mp', dataSecours.data.rsgts_mp)"
+                                  ng-onfocus="true" capitalize-first></textarea>
+                    </form>
+                    <form class="form-group">
+                    <label><span class="label label-primary">Circonstances de l'accident</span></label>
+                    <textarea class="form-control" rows="8" ng-model="dataSecours.data.rsgts_circonstances" capitalize-first
+                              placeholder="Informations pour l'établissement du PV de renseignement administratif..."
+                              ng-blur="updateFiche('rsgts_circonstances', dataSecours.data.rsgts_circonstances)">
+                    </textarea>
+                    </form>
+                    <form class="form-group">
+<label><span class="label label-primary">Renseignements divers</span></label>
+                        <textarea class="form-control" rows="6" ng-model="dataSecours.data.rsgts_divers"
+                                  placeholder="Autres renseignements..."
+                                  ng-blur="updateFiche('rsgts_divers', dataSecours.data.rsgts_divers)"
+                                  ng-onfocus="true" capitalize-first></textarea>
+                    </form>
+
+
+
+  
+
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-4">
+            <h4><label class="label label-primary">Affaire suivie par : </label></h4>
+            <select ng-model="dataSecours.data.suivi" class="form-control input-sm"
+                                    ng-options="item.nom as item.nom
+                                                for item in lstPersonnels
+                                                | filter: {type: 'Secouriste'}
+                                                | orderBy: 'nom'"
+                                    ng-change="updateFiche('suivi', dataSecours.data.suivi)">
+                            </select>
+            </div>
+            </div>
+            
+            <form class="form-group">
+            <div class="col-md-12">
+            <div class="checkbox">
+                <label><input type="checkbox"
+                              ng-checked="dataSecours.data.rsgts_check  == 1"
+                              ng-click="updateCheck('rsgts_check')">
+                    Caractère SENSIBLE, cochez la case.</label>
+            </div>
+            </div>
+
+            <div ng-show="dataSecours.data.rsgts_check == 1">
+                <h4><label class="label label-primary">Sensibilité</label></h4>
+                <div class="panel panel-primary">
+                   <div class="panel-body backgroundColor">
+                        <textarea class="form-control" rows="6" id="comment" capitalize-first
+                                  ng-model="dataSecours.data.rsgts_professionnel"
+                                  placeholder="Identité et coordonnées du tiers, encadrant, professionnel impliqué, suspicion d'infraction, personnalité de l'auteur ou de la victime, ampleur..."
+                                  ng-blur="updateFiche('rsgts_professionnel', dataSecours.data.rsgts_professionnel)">
+                        </textarea>
+                    </div>
+                </div>
+            </div>    
+            </form>
+        </div>
+    </div>
+</div>

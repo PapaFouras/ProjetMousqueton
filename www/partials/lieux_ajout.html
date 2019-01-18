@@ -1,0 +1,63 @@
+    <div class="modal-header">
+        <h4 class="modal-title">Alerte Secours en Montagne</h4>
+    </div>
+    <div class="modal-body">
+        <h4><label class="label label-primary">Ajout d'un lieu</label></h4>
+        <div class="panel panel-primary">
+            <div class="panel-body backgroundColor">
+                <form name="formAjoutLieu">
+                <div class="row"> <!-- Début de row 1-->
+                    <div class="col-md-12 form-group"
+                         ng-class="{'has-error': formAjoutLieu.$dirty && formAjoutLieu.lieu.$invalid,
+                                    'has-success': formAjoutLieu.lieu.$valid}">
+                        <label><span class="label label-primary">Localisation</span></label>
+                        <input type="text" class="form-control input-sm" required name="lieu"
+                               ng-model="selected.item.lieu" capitalize ng-onfocus="true"
+                               placeholder="Exemple : Refuge de la Pra">
+                    </div>
+                </div>
+                <div class="row"> <!-- Début de row 2-->
+                    <div class="col-md-2 form-group"
+                         ng-class="{'has-error': formAjoutLieu.$dirty && formAjoutLieu.altitude.$invalid,
+                                    'has-success': formAjoutLieu.altitude.$valid}">
+                        <label><span class="label label-primary">Altitude</span></label>
+                        <input type="text" class="form-control input-sm" 
+                               ng-model="selected.item.altitude" required name="altitude">
+                    </div>
+                    <div class="col-md-3 form-group"
+                         ng-class="{'has-error': formAjoutLieu.$dirty && formAjoutLieu.gps.$invalid,
+                                    'has-success': formAjoutLieu.gps.$valid}">
+                        <label><span class="label label-primary">Coordonnées GPS</span></label>
+                        <input type="text" class="form-control input-sm" ui-mask="N 99.999999° - E 9.999999°"
+                               ng-model="selected.item.gps" required name="gps">
+                    </div>
+                    <div class="form-group col-md-3"
+                         ng-class="{'has-error': formAjoutLieu.$dirty && formAjoutLieu.massif.$invalid,
+                                    'has-success': formAjoutLieu.massif.$valid}">
+                        <label><span class="label label-primary">Massif</span></label>
+                        <!--select ng-model="selected.item.massif" class="form-control input-sm" required
+                                ng-options="item.massifs as item.massifs
+                                            for item in lstMassifs" name="massif">
+                        </select-->
+			<input type="text" class="form-control input-sm" ng-model="selected.item.massif" required name="massif" >
+                    </div>
+                    <div class="form-group col-md-4"
+                         ng-class="{'has-error': formAjoutLieu.$dirty && formAjoutLieu.commune.$invalid,
+                                    'has-success': formAjoutLieu.commune.$valid}">
+                        <label><span class="label label-primary">Commune</span></label>
+                        <input type="text" class="form-control input-sm" placeholder="Entrez la commune" 
+                               name="commune" ng-model="selected.item.commune" required
+                               typeahead="item as item.commune +' (' + item.dept + ')'
+                                          for item in getCommunes($viewValue)"
+                               typeahead-loading="loadingCommunes">
+                        <i ng-show="loadingCommunes" class="glyphicon glyphicon-refresh"></i>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-click="ok()" ng-disabled="formAjoutLieu.$invalid">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    </div>

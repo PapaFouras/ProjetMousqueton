@@ -1,0 +1,61 @@
+<!-- Configuration de l'unité -->
+<div class="container>">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Configuration de l'unité</label></h4>
+            <br>
+            <form>
+                <!-- Ligne N°1-->
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>Code unité :</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input type="text" class="form-control" ng-model="config.code_unite" ng-onfocus="true">
+                            <span class="input-group-addon"><small><i>Exemple : 02717</i></small></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label>Unité :</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input type="text" class="form-control" ng-model="config.unite">
+                            <span class="input-group-addon"><small><i>Exemple : PGHM de l'Isère</i></small></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ligne N°2-->
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Commune de l'unité :</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                            <input type="text" class="form-control" ng-model="config.commune" capitalize>
+                            <span class="input-group-addon"><small><i>Exemple : LE VERSOUD (38)</i></small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Département de l'unité :</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                            <input type="text" class="form-control" ng-model="config.departement">
+                            <span class="input-group-addon"><small><i>Exemple : de l'Isère</i></small></span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" ng-click="updateUnite()">
+                    Enregistrer les modifications
+                </button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="alert alert-success col-md-12" ng-show="isVisibleUpdateUnite">
+            <p>Les données ont bien été enregistrées !</p>
+            <p>Veuillez patienter quelques secondes vous allez être redirigé sur la page d'accueil...</p>
+        </div>
+    </div>
+</div>

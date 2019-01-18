@@ -1,0 +1,127 @@
+<!-- Déroulement -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <h4><label class="label label-primary">Evénements</label></h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="btn-group-vertical">
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('debut')">
+                        <span class="glyphicon glyphicon-log-out"></span> Début du secours
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('arrive')">
+                        <span class="glyphicon glyphicon-arrow-right"></span> Arrivée sur les lieux
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('depart')">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Départ des lieux
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('ch')">
+                        <span class="glyphicon glyphicon-record"></span> Victime(s) au C.H.
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('fin')">
+                        <span class="glyphicon glyphicon-log-in"></span> Fin du secours
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('add')">
+                        <span class="glyphicon glyphicon-plus-sign text-success"></span>
+                        <span class="text-success"> Ajout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <h4><label class="label label-primary">Informations</label></h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="btn-group-vertical">
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('codis')">
+                        <span class="glyphicon glyphicon-earphone"></span> CODIS avisé
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('samu')">
+                        <span class="glyphicon glyphicon-earphone"></span> SMUR/SAMU avisé
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('corg')">
+                        <span class="glyphicon glyphicon-earphone"></span> CORG avisé
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4><label class="label label-primary">Déroulement des opérations</label></h4>
+            <table class="table table-striped table-bordered table-condensed">
+                <tr>
+                    <th class="col-md-1 alignCenter">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </th>
+                    <th class="col-md-1 alignCenter">Date</th>
+                    <th class="col-md-1 alignCenter">Heure</th>
+                    <th>Déroulement</th>
+                </tr> 
+                <tr ng-repeat="evenement in dataSecours.dataDeroulement.data | orderBy:'deroulement_gdh':true">
+                    <td class="col-md-1 alignCenter">
+                        <button class="btn btn-danger btn-xs" ng-click="deleteEvents(evenement.deroulement_id)">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+                    <td class="col-md-1 alignCenter">{{evenement.deroulement_gdh | dateToISO | date:'dd/MM/yyyy'}}
+										</td>
+                    
+                    <td ng-click="startEditing(evenement, 'gdh')">
+                        <span ng-hide="editingGdh == evenement.deroulement_id">
+                            {{evenement.deroulement_gdh | dateToISO | date:'HH:mm'}}
+                        </span>
+                        <form ng-submit="doneEditing(evenement, 'gdh', gTime, formGdh)" name="formGdh"
+                              ng-show="editingGdh == evenement.deroulement_id" novalidate="">
+                            <input class="inputEditing" ng-model="gTime" name="inputGdh"
+                                   ui-mask="99:99"
+                                   ng-blur="doneEditing(evenement, 'gdh', gTime, formGdh)"
+                                   ng-onfocus="evenement.deroulement_id == editedItemGdh">
+                        </form>
+                    </td>
+                    <td ng-click="startEditing(evenement, 'text')">
+                        <span ng-hide="editingText == evenement.deroulement_id">{{evenement.deroulement_texte}}</span>
+                        <form ng-submit="doneEditing(evenement, 'text')"
+                              ng-show="editingText == evenement.deroulement_id">
+                            <input class="inputEditing" ng-model="evenement.deroulement_texte"
+                                   ng-blur="doneEditing(evenement, 'text')"
+                                   ng-onfocus="evenement.deroulement_id == editedItemText">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <h4><label class="label label-primary">Autorités</label></h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="btn-group-vertical">
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('pghm')">
+                        <span class="glyphicon glyphicon-user"></span> Cdt PGHM avisé
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('parquet')">
+                        <span class="glyphicon glyphicon-user"></span> Parquet avisé
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('prefecture')">
+                        <span class="glyphicon glyphicon-user"></span> Préfecture avisée
+                        </button>
+                        <button id="deroulementButton" type="button" class="btn btn-default btn-sm"
+                                ng-click="addEvents('mairie')">
+                        <span class="glyphicon glyphicon-user"></span> Mairie avisée
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

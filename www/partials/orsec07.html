@@ -1,0 +1,106 @@
+<div class="modal-header">
+    <h4 class="modal-title">Alerte Secours en Montagne</h4>
+</div>
+<div class="modal-body">
+    <h4><label class="label label-primary">Compte rendu B.D.S.P - ORSEC ARDECHE</label></h4>
+    <div class="panel panel-primary">
+        <div class="panel-body backgroundColor">
+            <div class="row"> <!-- Début de row 1-->
+                <div class="col-md-12 form-group">
+                    <label><span class="label label-primary">Copiez le texte (Ctrl + C)</span></label>
+<!-- Corps du message pour le CRO de BDSP -->
+<textarea class="form-control" rows="15" onfocus="select()" ng-onfocus="true">
+1. ALERTE TRANSMISE PAR : {{dataSecours.data.alerte_origine}}
+   LE {{gdhBdsp}}
+
+2. DEBUT DE MISSION : {{txtDebut}}
+   FIN DE MISSION   : {{txtFin}}
+
+3. LOCALISATION :
+   COMMUNE : {{dataSecours.data.loc_commune}}  DEPARTEMENT : ARDECHE   MASSIF : {{dataSecours.data.loc_massif}}
+   ALTITUDE : {{dataSecours.data.loc_alt}} mètres    LIEU :  {{dataSecours.data.loc_lieu}}
+
+4. NATURE DES LIEUX : MONTAGNE
+
+5. NATURE DE L INTERVENTION :
+  {{txtType}} {{txtHelico}}
+  {{txtMed}}
+
+6. MOYENS ENGAGES :
+   Personnel(s) : {{nbMoyens.pghm}} {{nbMoyens.smur}} {{nbMoyens.cyno}} {{txtAut}}
+
+7. DISCIPLINE EXERCEE : {{dataSecours.data.acc_activites | dataToActivitesCourt}}
+
+8. BILAN HUMAIN :
+   {{txtVictimes}}
+
+9. CIRCONSTANCES : {{dataSecours.data.acc_rsgts}}
+
+10. IDENTIFICATION DU COS : PGHM 38
+
+BT
+
+</textarea>
+
+<a href="mailto:?to=corg.ggd38@gendarmerie.interieur.gouv.fr,
+corg.ggd07@gendarmerie.interieur.gouv.fr,
+directeur-cabinet@isere.pref.gouv.fr,
+38pftd-pref-isere@rescom.interieur.gouv.fr,
+pref-infos-operationnelles@isere.gouv.fr,
+MontagneSAMU38@chu-grenoble.fr,
+gh-grenoble@interieur.gouv.fr,
+38crsalp-crs-alpes-grenoble@rescom.interieur.gouv.fr,
+codis.chef-de-salle@sdis38.fr
+&cc=pghm.le-versoud@gendarmerie.interieur.gouv.fr,
+patrick.poirot@gendarmerie.interieur.gouv.fr,
+pierre-marie.dupre@gendarmerie.interieur.gouv.fr,
+&subject={{dataSecours.data.fiche}}/SECOURSPGHM38 - FIN D'OPERATION DE SECOURS EN MONTAGNE
+&body=
+BT%0D%0A
+NON PROTEGE%0D%0A
+NMR/{{dataSecours.data.fiche}}/SECOURSPGHM38%0D%0A
+OBJ/FIN D OPERATION DE SECOURS EN MONTAGNE%0D%0A
+REF/%0D%0A
+TXT%0D%0A
+%0D%0A
+1. ALERTE TRANSMISE PAR : {{dataSecours.data.alerte_origine}}%0D%0A
+&emsp;LE {{gdhBdsp}}%0D%0A
+%0D%0A
+2. DEBUT DE MISSION : {{txtDebut}}%0D%0A
+&emsp;FIN DE MISSION   : {{txtFin}}%0D%0A
+%0D%0A
+3. LOCALISATION :%0D%0A
+&emsp;COMMUNE : {{dataSecours.data.loc_commune}}  DEPARTEMENT : ISERE   MASSIF : {{dataSecours.data.loc_massif}}%0D%0A
+&emsp;ALTITUDE : {{dataSecours.data.loc_alt}} mètres    LIEU :  {{dataSecours.data.loc_lieu}}  %0D%0A
+%0D%0A
+4. NATURE DES LIEUX : MONTAGNE%0D%0A
+%0D%0A
+5. NATURE DE L INTERVENTION :%0D%0A
+&emsp;{{txtType}} {{txtHelico}} %0D%0A
+&emsp;{{txtMed}} %0D%0A
+%0D%0A
+6. MOYENS ENGAGES : %0D%0A
+&emsp;Personnel(s) : {{nbMoyens.pghm}} {{nbMoyens.smur}} {{nbMoyens.cyno}} {{txtAut}} %0D%0A
+%0D%0A
+7. DISCIPLINE EXERCEE : {{dataSecours.data.acc_activites | dataToActivitesCourt}}%0D%0A
+%0D%0A
+8. BILAN HUMAIN :%0D%0A
+&emsp;{{txtVictimes_msg}}%0D%0A
+%0D%0A
+9. CIRCONSTANCES : {{dataSecours.data.acc_rsgts}}%0D%0A
+%0D%0A
+10. IDENTIFICATION DU COS : PGHM 38%0D%0A
+%0D%0A
+BT
+">
+MESSAGE PREFECTURE ORSEC ARDECHE
+</a>
+<!-- Corps du message pour le CRO de BDSP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="cancel()">Fermer</button>
+</div>

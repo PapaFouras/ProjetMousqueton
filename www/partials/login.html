@@ -1,0 +1,15 @@
+    <div class="modal-header">
+        <h4 class="modal-title">Alerte Secours en Montagne</h4>
+    </div>
+    <div class="modal-body">
+        <form ng-submit="ok(password)">
+            <label>Veuillez entrez le mot de passe !</label>
+            <input id="password" type="password" class="form-control" ng-model="password" ng-onfocus="true">
+        </form>
+        <br>
+        <div class="alert alert-danger" ng-show="mdp"><i><strong>Mot de passe invalide !</strong></i></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok(password)">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    </div>

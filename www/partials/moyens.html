@@ -1,0 +1,120 @@
+<!-- Moyens engagés -->
+<div class="content" ng-controller="moyensCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <h4><label class="label label-primary">Moyens disponibles</label></h4>
+            <table ng-table="tableMoyensDisponibles" class="table table-condensed">
+            <tbody ng-repeat="group in $groups" ng-controller="groupCtrl">
+                <tr class="ng-table-group">
+                    <td colspan="{{$columns.length}}">
+                        <a href="" ng-click="switchGroup(group, $parent.$groups)">
+                            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': group.$hideRows,
+                                                              'glyphicon-chevron-down': !group.$hideRows}">
+                            </span>
+                            <strong>{{ group.value }}</strong>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-hide="group.$hideRows" ng-repeat="user in group.data">
+                    <td data-title="" class="alignCenter">
+                        <button class="btn btn-success btn-xs" ng-click="addMoyens(user)">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+                    </td>
+                    <td sortable="'organisme'" data-title="'Organisme'">
+                        {{user.organisme}}
+                    </td>
+                    <td data-title="'lieu'">
+                        {{user.lieu}}
+                    </td>
+                    <td sortable="'nom'" data-title="'Nom'">
+                        {{user.nom}}
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4><label class="label label-primary">Moyens engagés</label></h4>
+            <table ng-table="tableMoyensEngages" class="table table-condensed">
+            <tbody ng-repeat="group in $groups">
+                <tr class="ng-table-group">
+                    <td colspan="{{$columns.length}}">
+                        <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': group.$hideRows,
+                                                              'glyphicon-chevron-down': !group.$hideRows}">
+                            </span>
+                            <strong>{{ group.value }}</strong>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-hide="group.$hideRows" ng-repeat="user in group.data track by $index">
+                    <td data-title="" class="alignCenter">
+                        <button class="btn btn-danger btn-xs" ng-click="deleteMoyens(user.nom, user.lieu)">
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+                    <td sortable="'organisme'" data-title="'Organisme'">
+                        {{user.organisme}}
+                    </td>
+                    <td sortable="'lieu'" data-title="'Lieu'">
+                        {{user.lieu}}
+                    </td>
+                    <td sortable="'nom'" data-title="'Nom'">
+                        {{user.nom}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+            <div class="form-group col-md-6">
+                <h4><label class="label label-primary">Type d'opération</label></h4>
+                    
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="1"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Héliportée
+                    </label>
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="2"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Mixte
+                    </label>
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="3"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Terrestre
+                    </label>
+
+                <h4><label class="label label-primary">Cas particuliers</label></h4>
+
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="8"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Régulation - Enquête
+                    </label>
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="4"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Aucun moyen engagé
+                    </label>
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="5"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Intervention confiée au SDIS
+                    </label>
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="6"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Intervention confiée aux pisteurs
+                    </label>
+                    <label class="radio">
+                            <input type="radio" name="caravane" value="7"
+                                       ng-model="dataSecours.data.caravane"
+                                       ng-change="updateFiche('caravane', dataSecours.data.caravane)">Intervention confiée Gendarmerie
+                    </label>
+   
+                    
+            </div>         
+        </div>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html lang="fr-FR" ng-app="asm">
+<head>
+    <meta charset="UTF-8">
+    <title>Alerte Secours en Montagne</title>
+    <link href="vendors/bootstrap-3.3.2-dist/css/bootstrap_2.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/ng-table/ng-table.css" rel="styleSheet">
+    <link href="vendors/ui-select/select.css" rel="stylesheet">
+</head>
+
+<body ng-controller="mainCtrl">
+
+<!-- Navbar supérieure-->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <!-- Navbar header -->
+    <div class="navbar-header col-md-3">
+        <a class="navbar-brand" href="#/page/home">
+            <span class="glyphicon glyphicon-home"></span>
+            <strong>A.S.M PGHM 38</strong></span><small> </small>
+        </a>
+    </div>
+    <!-- Navbar gauche -->     
+    <div class="col-md-9">
+        <ul class="nav navbar-nav navbar-left">
+            <!-- Onglets de navigation --> 
+            <li ng-class="{active: navTab.path == '/page/alerte'}">
+                <a href="#/page/alerte"><span class="glyphicon glyphicon-earphone"></span> Alerte</a>
+            </li>
+            <li ng-class="{active: navTab.path == '/page/moyens'}">
+                <a href="#/page/moyens"><span class="glyphicon glyphicon-list"></span> Moyens engagés</a>
+            </li>
+            <li ng-class="{active: navTab.path == '/page/deroulement'}">
+                <a href="#/page/deroulement"><span class="glyphicon glyphicon-calendar"></span> Déroulement</a>
+            </li>
+            <li ng-class="{active: navTab.path == '/page/victimes'}">
+                <a href="#/page/victimes"><span class="glyphicon glyphicon-user"></span> Victimes</a>
+            </li>
+            <li ng-class="{active: navTab.path == '/page/rsgts'}">
+                <a href="#/page/rsgts"><span class="glyphicon glyphicon-paperclip"></span> Renseignements</a>
+            </li>
+        </ul>
+        <!-- Navbar droite -->
+        <ul class="nav navbar-nav navbar-right">
+            <!-- Onglet Configuration --> 
+            <li class="dropdown" ng-class="{active: (navTab.path == '/page/config/annee') ||
+                                                    (navTab.path == '/page/config/statistiques') ||
+                                                    (navTab.path == '/page/config/recherche') ||
+                                                    (navTab.path == '/page/config/data') ||
+                                                    (navTab.path == '/page/config/unite')}">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;Avançé&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/page/config/annee">Selection de l'année</a></li>
+                    <li><a href="#/page/config/statistiques">Statistiques</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/page/config/recherche">Recherche avancée</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header"><strong>Configuration</strong></li>
+                    <!-- Lieux d'évacuation -->
+                    <li>
+                        <a ng-controller="loginCtrl" ng-click="modalLogin('data', 'Evacuations')">
+                            Lieux d'évacuation
+                        </a>
+                    </li>
+                    <!-- Massifs -->
+                    <li>
+                        <a ng-controller="loginCtrl" ng-click="modalLogin('data', 'Massifs')">
+                            Massifs</a>
+                    </li>
+                    <!-- Moyens -->
+                    <li>
+                        <a ng-controller="loginCtrl" ng-click="modalLogin('data', 'Moyens')">
+                            Moyens</a>
+                    </li>
+                    <!-- Unité -->
+                    <li><a ng-controller="loginCtrl" ng-click="modalLogin('unite')">Unité</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-controller="aboutCtrl" ng-click="modalAbout()">A propos</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Navbar inférieure-->    
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <!-- Navbar header -->
+    <div class="navbar-header col-md-3">
+        <a class="navbar-brand">
+            <div>
+                <span><small>
+                <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                    {{dataSecours.data.loc_lieu | limitTo: 30}}...
+                    </small></span>
+            </div>
+            <div>
+                <span><small>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    <strong>Année</strong>&nbsp;{{dataSecours.year}}
+                </small></span>
+            </div>
+        </a>
+    </div>
+    <!-- Navbar gauche -->
+    <div class="col-md-9">
+        <form class="navbar-form">
+            <!-- Boutton SMS --> 
+            <button id="buttonAdd" type="button" class="btn btn-info navbar-btn"
+                    ng-click="sendSMS()"
+                    data-toggle="tooltip" title="Envoi de l'alerte par SMS aux secouristes">
+                <span class="glyphicon glyphicon-phone"></span>
+            </button>
+            <!-- First et Previous --> 
+            <div class="btn-group">
+                <button type="button" class="btn btn-info navbar-btn"
+                        ng-click="navFunction('first')" ng-class="dataSecours.first">
+                <span class="glyphicon glyphicon-fast-backward"></span></button>
+                <button type="button" class="btn btn-info navbar-btn"
+                        ng-click="navFunction('previous')" ng-class="dataSecours.previous">
+                <span class="glyphicon glyphicon-step-backward"></span></button>
+            </div>
+            <!-- Informtions de navigation (numéros...) --> 
+            <div class="form-group">
+                <strong>
+                    <input id="Num" type="text" class="form-control"
+                           ng-model="dataSecours.currentSecours" readonly>
+                    <span>/</span>
+                    <input id="Num" type="text" class="form-control"
+                           ng-model="dataSecours.totalSecours" readonly>
+                </strong>
+            </div>
+            <!-- Last et Previous --> 
+            <div class="btn-group">
+                <button type="button" class="btn btn-info navbar-btn"
+                        ng-click="navFunction('next')" ng-class="dataSecours.next">
+                <span class="glyphicon glyphicon-step-forward"></span></button>
+                <button type="button" class="btn btn-info navbar-btn"
+                        ng-click="navFunction('last')" ng-class="dataSecours.last">
+                <span class="glyphicon glyphicon-fast-forward"></span></button>
+            </div>
+            <!-- Bouttons Ajout & Suppression --> 
+            <button id="buttonAdd" type="button" class="btn btn-success navbar-btn"
+                    ng-click="addSecours()">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                <span class="glyphicon glyphicon-file"></span>
+            </button>
+            <button id="buttonAdd" type="button" class="btn btn-danger navbar-btn"
+                    ng-click="open('', 'Fiche de secours N° ' + dataSecours.id)"
+                    ng-controller="deleteCtrl">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+            <!-- Bouttons Impression --> 
+            <div class="btn-group">
+                <button id="buttonAdd" type="button" class="btn btn-warning navbar-btn"
+                        ng-click="printAsm()"
+                        data-toggle="tooltip" title="Impression PDF">
+                    <span class="glyphicon glyphicon-print"></span>
+                </button>
+                <button id="buttonAdd" type="button" class="btn btn-warning navbar-btn"
+                        ng-click="bdspModal()" ng-controller="bdspCtrl"
+                        data-toggle="tooltip" title="BDSP C.R.O">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+                <button id="buttonAdd" type="button" class="btn btn-warning navbar-btn"
+                        ng-click="printPv()"
+                        data-toggle="tooltip" title="PV R.A">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </div>
+            <!-- Boutton Search --> 
+            <div class="input-group navbar-btn navbar-right">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <input id="inputSearch" type="number" class="form-control" placeholder="N°..."
+                       ng-model="inputSearch">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-info"
+                            ng-click="searchPv(inputSearch)"><strong><small>PV</small></strong>
+                    </button>
+                    <button type="button" class="btn btn-info"
+                            ng-click="searchId(inputSearch)"><strong><small>ID</small></strong>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</nav>     
+
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <div ng-view></div>
+    </div>
+</div>
+
+<!-- Modules JavaScript -->
+<script src="vendors/jquery/jquery-1.11.2.js"></script>
+<script src="vendors/bootstrap-3.3.2-dist/js/bootstrap.js"></script>
+<script src="vendors/angular-1.3.13/angular.js"></script>
+<script src="vendors/angular-1.3.13/angular-route.js"></script>
+<script src="vendors/angular-1.3.13/angular-animate.js"></script>
+<script src="vendors/angular-1.3.13/angular-sanitize.js"></script>
+<script src="vendors/ng-table/ng-table.js"></script>
+<script src="vendors/ui-utils/ui-utils.min.js"></script>
+<script src="vendors/ui-select/select.min.js"></script>
+<script src="vendors/boostrap-angularjs/ui-bootstrap-tpls-0.12.1.js"></script>
+<!-- Modules AngularJS --> 
+<script src="js/app.js"></script>
+<script src="js/controllers/controller.js"></script>
+<script src="js/services/services.js"></script>
+<script src="js/filters/filters.js"></script>
+<script src="js/directives/directives.js"></script>
+<script src="js/controllers/modal.js"></script>
+
+</body>
+</html>

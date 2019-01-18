@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h4 class="modal-title">Alerte Secours en Montagne</h4>
+</div>
+<div class="modal-body">
+    <h4><label class="label label-primary">Compte rendu B.D.S.P</label></h4>
+    <div class="panel panel-primary">
+        <div class="panel-body backgroundColor">
+            <div class="row"> <!-- Début de row 1-->
+                <div class="col-md-12 form-group">
+                    <label><span class="label label-primary">Copiez le texte (Ctrl + C)</span></label>
+<!-- Corps du message pour le CRO de BDSP -->
+<textarea class="form-control" rows="15" onfocus="select()" ng-onfocus="true">
+Identifiant secours N° : {{dataSecours.data.id}}
+Unité : {{dataSecours.unite}} - {{dataSecours.cu}}
+
+1/ - Alerte :
+Date et heure : {{gdhBdsp}}
+Origine : {{dataSecours.data.alerte_origine}} {{dataSecours.data.requerant}}
+Localisation : {{dataSecours.data.loc_lieu}} ({{dataSecours.data.loc_alt}} mètres)
+Commune : {{dataSecours.data.loc_commune}}
+Coordonnées WGS84 : {{dataSecours.data.loc_gps | gpsToWGS84}}
+Activité : {{dataSecours.data.acc_activites | dataToActivites}}
+
+2/ - Moyens engagés :
+Hélicoptère(s) : {{txtHelico}}
+Personnel(s) : {{nbMoyens.pghm}} PGHM - {{nbMoyens.smur}} Médecin(s) - {{nbMoyens.cyno}} Equipe(s) cynophile(s) - {{nbMoyens.autre}} Autre(s) secouriste(s)
+
+3/ - Déroulement :
+{{txtDebut}}
+{{txtFin}}
+
+4/ - Victime(s) :
+{{txtVictimes}}
+
+5/ - Circonstances :
+{{dataSecours.data.rsgts_circonstances}}
+</textarea>
+<!-- Corps du message pour le CRO de BDSP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="cancel()">Fermer</button>
+</div>

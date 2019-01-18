@@ -1,0 +1,26 @@
+<!-- Configuration de l'année -->
+<div class="container>">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Configuration de la base de données</label></h4>
+            <br>
+            <label>Année actuellement sélectionnée :
+                <span class="label label-default"> {{dataConfig.currentYear.annee}}</span>
+            </label>
+            <div class="input-group col-md-4">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input type="number" class="form-control" ng-model="dataConfig.selectedYear">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" ng-click="updateYear()">OK</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="alert alert-success col-md-12" ng-hide="dataConfig.isHide">
+            <p>Le changement d'année a bien été prise en compte !</p>
+            <p>Veuillez patienter quelques secondes vous allez être redirigé sur la page d'accueil...</p>
+        </div>
+    </div>
+</div>

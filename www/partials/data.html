@@ -1,0 +1,318 @@
+<!-- Configuration de l'unité -->
+<div class="container>">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">Configuration du fichier de données : {{dataType}}</label></h4>
+            <br>
+            <!-- ********** Evacuation ********** -->
+            <div ng-show="dataType == 'Evacuations'">
+                
+                <!-- Bouton Ajout -->
+                <button class="btn btn-success btn-sm col-md-1" ng-click="addEvacuation('...')">
+                    <span class="glyphicon glyphicon-plus-sign">
+                    </span><strong>&nbsp;Ajouter</strong>
+                </button>
+                
+                <!-- Tableau NG Table -->
+                <table ng-table class="table table-condensed">
+                <tbody ng-repeat="evacuation in evacuations">
+                    
+                    <!-- En tête -->
+                    <tr>
+                    <td data-title="'Action'" class="col-md-1">
+                        <button class="btn btn-success btn-xs" ng-click="setEditId(evacuation.id)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteEvacuation(evacuation.id)">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+                    <td data-title="'#'" class="col-md-1">{{evacuation.id}}</td>
+                    <td data-title="'Lieu d\'évacuation'" class="col-md-10">{{evacuation.lieu_evacuation}}</td>
+                    </tr>
+                    
+                    <!-- Tableau pour les modifications -->
+                    <tr ng-show="editId===evacuation.id" ng-if="editId===evacuation.id">
+                    <td colspan="3" class="col-md-12">
+                        <!-- Ligne N°1 -->
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Lieux d'évacuation</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="evacuation.lieu_evacuation"
+                                           ng-onfocus="true" onfocus="select()" capitalize>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ligne N°2 - Boutons d'édition -->
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <button class="btn btn-success btn-sm"
+                                        ng-click="updateEvacuation(evacuation.id,evacuation.lieu_evacuation)">
+                                    <strong>Sauver</strong>
+                                </button>
+                                <button class="btn btn-danger btn-sm" ng-click="setEditId(-1)">
+                                    <strong>Annuler</strong>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <!-- ********** Fin - Evacuation ********** -->
+            
+            <!-- ********** Massifs ********** -->
+            <div ng-show="dataType == 'Massifs'">
+                
+                <!-- Bouton Ajout -->
+                <button class="btn btn-success btn-sm col-md-1" ng-click="addMassif('...')">
+                    <span class="glyphicon glyphicon-plus-sign">
+                    </span><strong>&nbsp;Ajouter</strong>
+                </button>
+                
+                <!-- Tableau NG Table -->
+                <table ng-table class="table table-condensed">
+                <tbody ng-repeat="massif in massifs">
+                    
+                    <!-- En tête -->
+                    <tr>
+                    <td data-title="'Action'" class="col-md-1">
+                        <button class="btn btn-success btn-xs" ng-click="setEditId(massif.id)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteMassif(massif.id)">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+                    <td data-title="'#'" class="col-md-1">{{massif.id}}</td>
+                    <td data-title="'Massifs'" class="col-md-10">{{massif.massifs}}</td>
+                    </tr>
+                    
+                    <!-- Tableau pour les modifications -->
+                    <tr ng-show="editId===massif.id" ng-if="editId===massif.id">
+                    <td colspan="3" class="col-md-12">
+                        <!-- Ligne N°1 -->
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Massifs</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="massif.massifs"
+                                           ng-onfocus="true" onfocus="select()" capitalize-first>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ligne N°2 - Boutons d'édition -->
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <button class="btn btn-success btn-sm"
+                                        ng-click="updateMassif(massif.id,massif.massifs)">
+                                    <strong>Sauver</strong>
+                                </button>
+                                <button class="btn btn-danger btn-sm" ng-click="setEditId(-1)">
+                                    <strong>Annuler</strong>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <!-- ********** Fin - Massifs ********** -->
+            
+            <!-- ********** Moyens ********** -->
+            <div ng-show="dataType == 'Moyens'">
+                
+                <!-- Bouton Ajout -->
+                <div class="row">
+                    <div class="form-group col-md-1">
+                    <button class="btn btn-success" ng-click="addMoyen(addTypeMoyen)">
+                        <span class="glyphicon glyphicon-plus-sign">
+                        </span><strong>&nbsp;Ajouter</strong>
+                    </button>
+                    </div>
+                    <div class="form-group col-md-2">
+                    <select class="form-control btn-sm" ng-model="addTypeMoyen" ng-init="addTypeMoyen='1'">
+                        <option value=1>Secouriste</option>
+                        <option value=2>Hélicoptère</option>
+                        <option value=3>Equipage</option>
+                        <option value=4>Médecin</option>
+                        <option value=5>Equipe cynophile</option>
+                        <option value=6>Autre</option>
+                    </select>
+                    </div>
+                </div>
+                
+                <!-- Tableau NG Table -->
+                <table ng-table="tableParamsMoyens" class="table table-condensed">
+                <!--<tbody ng-repeat="moyen in $data">-->
+                    <tbody ng-repeat="group in $groups" ng-controller="groupCtrl">
+                    
+                    <!-- Groupes -->
+                    <tr class="ng-table-group">
+                    <td colspan="{{$columns.length}}">
+                        <a href="" ng-click="switchGroup(group, $parent.$groups)">
+                            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': group.$hideRows,
+                                                              'glyphicon-chevron-down': !group.$hideRows}">
+                            </span>
+                            <strong>{{group.value}}</strong>
+                        </a>
+                    </td>
+                    </tr>
+                    
+                    <!-- En tête -->
+                    <tr ng-hide="group.$hideRows" ng-repeat-start="moyen in group.data">
+                    <td data-title="'Action'" class="col-md-1">
+                        <button class="btn btn-success btn-xs" ng-click="setEditId(moyen.id)">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteMoyen(moyen.id)">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                    </td>
+                    <td data-title="'#'">{{moyen.id}}</td>
+                    <!--<td data-title="'Ordre'" sortable="'ordre'">{{moyen.ordre}}</td>-->
+                    <!--<td data-title="'Type'" sortable="'type'">{{moyen.type}}</td>-->
+                    <td data-title="'Organisme'" sortable="'organisme'">{{moyen.organisme}}</td>
+                    <td data-title="'Lieu'" sortable="'lieu'">{{moyen.lieu}}</td>
+                    <td data-title="'Nom'" sortable="'nom'">{{moyen.nom}}</td>
+                    <td data-title="'Prénom'">{{moyen.prenom}}</td>
+                    <td data-title="'Grade'">{{moyen.grade}}</td>
+		    <td data-title="'Téléphone'">{{moyen.tph}}</td>
+                    </tr>
+                    
+                    <!-- Tableau pour les modifications -->
+                    <!--<tr ng-show="editId===moyen.id" ng-if="editId===moyen.id">-->
+                    <tr ng-repeat-end="" ng-if="editId===moyen.id">
+                    <td colspan="9" class="col-md-12">
+                        <!-- Ligne N°1 -->
+                        <div class="row">
+                            <!-- Champ : Type -->
+                            <div class="form-group col-md-2">
+                                <label>Type</label>
+                                <select class="form-control" ng-model="moyen.type"
+                                        ng-options="item as item for item in type">
+                                </select>
+                                <div><i><small>Choisir parmi la liste...</small></i></div>
+                            </div>
+                            <!-- Champ : Organisme -->
+                            <div class="form-group col-md-4" ng-if="moyen.type != 'Equipage'">
+                                <label>Organisme</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="moyen.organisme"
+                                           ng-onfocus="true" onfocus="select()" capitalize>
+                                </div>
+                                <div><i><small>Exemple : PGHM, DAG, SMUR, Sécurité Civile...</small></i></div>
+                            </div>
+                            <!-- Champ : Fonction -->
+                            <div class="form-group col-md-4" ng-if="moyen.type == 'Equipage'">
+                                <label>Fonction</label>
+                                <select class="form-control" ng-model="moyen.organisme">
+                                    <option>Pilote</option>
+                                    <option>Mécanicien</option>
+                                </select>
+                                <div><i><small>Choisir parmi la liste...</small></i></div>
+                            </div>
+                            <!-- Champ : Lieu -->
+                            <div class="form-group col-md-4">
+                                <label>Lieu</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="moyen.lieu"
+                                           capitalize>
+                                </div>
+                                <div><i><small>Exemple : LE VERSOUD, CHAMONIX, MODANE...</small></i></div>
+                            </div>
+                        </div>
+                            
+                        <!-- Ligne N°2 -->
+                        <div class="row">
+                            <!-- Champ : Grade -->
+                            <div class="form-group col-md-2" ng-if="(moyen.type == 'Secouriste') ||
+                                                                    (moyen.type == 'Equipage') ||
+                                                                    (moyen.type == 'Equipe cynophile')">
+                                <label>Grade</label>
+                                <select class="form-control" ng-model="moyen.grade" ng-options="item for item in grades">
+                                </select>
+                                <div><i><small>Choisir parmi la liste...</small></i></div>
+                            </div>
+                            <!-- Champ : Nom -->
+                            <div class="form-group col-md-4" ng-if="moyen.type != 'Autre'">
+                                <label>Nom</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="moyen.nom" capitalize>
+                                </div>
+                                <div ng-if="moyen.type != 'Hélicoptère'">
+                                    <i><small>Exemple : REYMOND, BREMOND...</small></i>
+                                </div>
+                                <div ng-if="moyen.type == 'Hélicoptère'">
+                                    <i><small>Exemple : CHOUCAS 05, DRAGON 38...</small></i>
+                                </div>
+                            </div>
+                            <!-- Champ : Prénom -->
+                            <div class="form-group col-md-4" ng-if="(moyen.type == 'Secouriste') ||
+                                                                    (moyen.type == 'Equipage') ||
+                                                                    (moyen.type == 'Médecin') ||
+                                                                    (moyen.type == 'Equipe cynophile')">
+                                <label>Prénom</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="moyen.prenom"
+                                           capitalize-first>
+                                </div>
+                                <div><i><small>Exemple : Olivier, Boris...</small></i></div>
+                            </div>
+			    <!-- Champ : Téléphone -->
+                            <div class="form-group col-md-4" ng-if="(moyen.type == 'Secouriste') ||
+                                                                    (moyen.type == 'Equipage') ||
+                                                                    (moyen.type == 'Médecin') ||
+                                                                    (moyen.type == 'Equipe cynophile')">
+                                <label>Téléphone</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    </span>
+                                    <input type="text" class="form-control" ng-model="moyen.tph" ui-mask="+33(9)9.99.99.99.99">
+                                </div>
+                                <div><i><small>Exemple : +33(0)612345678, ...</small></i></div>
+                            </div>
+                        </div>
+                        <!-- Ligne N°3 - Boutons d'édition -->
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <button class="btn btn-success btn-sm"
+                                        ng-click="updateMoyen(moyen)">
+                                    <strong>Sauver</strong>
+                                </button>
+                                <button class="btn btn-danger btn-sm" ng-click="setEditId(-1)">
+                                    <strong>Annuler</strong>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <!-- ********** Fin - Moyens ********** -->
+        </div>
+    </div>
+</div>

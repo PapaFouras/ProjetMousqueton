@@ -1,0 +1,228 @@
+<!-- Victimes -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><label class="label label-primary">{{dataSecours.dataVictimes.data.length}} Victimes</label></h4>
+            <!-- Formulaire de saisie et de MAJ des victimes -->
+            <div class="panel panel-success" ng-style="isVisible">
+                <div class="panel-heading">
+                    <h4 id="panelVictimes">
+                        <label class="label label-success">Ajout et modification des victimes</label>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" name="formVictimes">
+                        <div class="row"> <!-- Début de row 1-->
+                            <div class="form_group col-md-4">
+                                <label class="control-label">Nom</label>
+                                <input type="text" class="form-control" placeholder="Entrez le nom"
+                                       ng-model="selectedNom" capitalize
+                                       ng-blur="updateVictime('nom', selectedNom)">
+                            </div>
+                            <div class="form_group col-md-4">
+                                <label class="control-label">Prénom</label>
+                                <input type="text" class="form-control" placeholder="Entrez le prénom"
+                                       ng-model="selectedPrenom" capitalize-first
+                                       ng-blur="updateVictime('prenom', selectedPrenom)">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Sexe </label>
+                                <div>
+                                       <label class="radio-inline">
+                                        <input type="radio" name="sexe" value="M" ng-model="selectedSexe"
+                                               ng-click="updateVictime('sexe', selectedSexe)"> Homme
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sexe" value="F" ng-model="selectedSexe"
+                                               ng-click="updateVictime('sexe', selectedSexe)"> Femme
+                                    </label>
+                                </div>
+                            </div>
+                        </div> <!-- Fin de row 1-->
+                        <div class="row"> <!-- Début de row 2-->
+                            <div class="form_group col-md-2">
+                                <label class="control-label">Date de naissance</label>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" name="inputNaissance"
+                                           ui-mask="99/99/9999" ng-model="selectedNaissance"
+                                           ng-blur="updateDate('naissance_date', formVictimes.inputNaissance.$viewValue)">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="form_group col-md-3">
+                                <label class="control-label">Lieu de naissance</label>
+                                <input type="text" class="form-control" placeholder="Entrez la commune" 
+                                       name="inputCommune"
+                                       typeahead="item as item.commune +' (' + item.dept + ')'
+                                                  for item in getCommunes($viewValue)"
+                                       typeahead-loading="loadingCommunes"
+                                       ng-model="selectedCommune"
+                                       ng-blur="updateVictime('naissance_lieu', formVictimes.inputCommune.$viewValue)">
+                                <i ng-show="loadingCommunes" class="glyphicon glyphicon-refresh"></i>
+                            </div>
+                            <div class="form_group col-md-2">
+                                <label class="control-label">Nationalité</label>
+                                <input type="text" class="form-control" placeholder="Entrez le pays"
+                                       typeahead="item.pays for item in getPays($viewValue)"
+                                       typeahead-loading="loadingPays"
+                                       ng-model="selectedNationalite"
+                                       ng-blur="updateVictime('nationalite', selectedNationalite)">
+                                <i ng-show="loadingPays" class="glyphicon glyphicon-refresh"></i>
+                            </div>
+                            <div class="form_group col-md-3">
+                                <label class="control-label">Profession</label>
+                                <input type="text" class="form-control" ng-model="selectedProfession"
+                                       placeholder="Entrez la profession" capitalize-first
+                                       ng-blur="updateVictime('profession', selectedProfession)">
+                            </div>
+                            <div class="form_group col-md-2">
+                                <label class="control-label">Téléphone</label>
+                                <input type="text" class="form-control" ng-model="selectedTph"
+                                       placeholder="+33(0)1 23 45 67 89"
+                                       ng-blur="updateVictime('tph', selectedTph)">
+                            </div>
+                        </div> <!-- Fin de row 2-->
+                        <div class="row"> <!-- Début de row 3-->
+                            <div class="form_group col-md-4">
+                                <label class="control-label">Adresse</label>
+                                <input type="text" class="form-control" placeholder="Entrez l'adresse"
+                                       ng-model="selectedAdresse" capitalize-first
+                                       ng-blur="updateVictime('adresse', selectedAdresse)">
+                            </div>
+                            <div class="form_group col-md-3">
+                                <label class="control-label">Ville - Département</label>
+                                <input type="text" class="form-control" placeholder="Entrez la ville" name="inputVille"
+                                       typeahead="item as item.commune +' (' + item.dept + ')'
+                                                  for item in getCommunes($viewValue)"
+                                       typeahead-loading="loadingVille"
+                                       ng-model="selectedVille"
+                                       ng-blur="updateVictime('adresse_commune', formVictimes.inputVille.$viewValue)">
+                                <i ng-show="loadingVille" class="glyphicon glyphicon-refresh"></i>
+                            </div>
+                            <div class="form_group col-md-2">
+                                <label class="control-label">Etat médical</label>
+                                <select ng-model="selectedEtat" class="form-control"
+                                        ng-options="item for item in lstEtat"
+                                        ng-change="updateVictime('etat', selectedEtat)">
+                                </select>
+                            </div>
+                            <div class="form_group col-md-3">
+                                <label class="control-label">Evacuation</label>
+                                <select ng-model="selectedEvacuation" class="form-control"
+                                        ng-options="item.lieu_evacuation as item.lieu_evacuation
+                                                    for item in lstEvacuation"
+                                        ng-change="updateVictime('evacuation', selectedEvacuation)">
+                                </select>
+                            </div>
+                        </div> <!-- Fin de row 3-->
+                        <div class="row"> <!-- Début de row 4-->
+                            <div class="form_group col-md-7">
+                                <label class="control-label">Filiation</label>
+                                <input type="text" class="form-control" ng-model="selectedFiliation"
+                                       placeholder="Fils de (Nom et Prénom du père) et de (Nom et Prénom de la mère)"
+                                       ng-blur="updateVictime('filiation', selectedFiliation)">
+                            </div>
+                            <div class="form_group col-md-5">
+                                <label class="control-label">Blessures</label>
+                                <ui-select multiple ng-model="selectedBlessures.blessures" id="ui-selectBlessures"
+                                           ng-click="updateBlessures('blessures', selectedBlessures.blessures)"
+                                           on-select="updateBlessures('blessures', selectedBlessures.blessures)">
+                                    <ui-select-match placeholder="Selectionnez les blessures...">
+                                        {{$item.blessures}}
+                                    </ui-select-match>
+                                    <ui-select-choices group-by="'categorie'"
+                                                       repeat="blessures in availableBlessures | filter:$select.search">
+                                        {{blessures.blessures}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div> <!-- Fin de row 4-->
+                        <div class="row"> <!-- Début de row 5-->
+                            <div class="form_group col-md-2 pull-right">
+                                <button id="formBtn" class="form-control btn btn-success" ng-click="notVisibleForm()">
+                                    <span class="glyphicon glyphicon-ok"></span> Fermer
+                                </button>
+                            </div>
+                        </div> <!-- Fin de row 5-->
+                    </form>
+                </div>
+            </div>
+            <!-- Fin du formulaire de saisie et de MAJ des victimes -->
+            <table class="table table-striped table-bordered table-condensed">
+                <tr>
+                    <th colspan="8">
+                        <button class="btn btn-success btn-xs" ng-click="addVictime()">
+                            <span class="glyphicon glyphicon-plus-sign"></span> 
+                            <span class="glyphicon glyphicon-user"></span>
+                        </button>
+                        <button class="btn btn-primary btn-xs" ng-click="confirm('', 'au traitement CNIL')"
+                                ng-controller="confirmCtrl">
+                            <span class="glyphicon glyphicon-pushpin"></span> CNIL
+                        </button>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col-md-1 alignCenter">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </th>
+                    <th class="col-md-3">Identité</th>
+                    <th class="col-md-1 alignCenter">Age</th>
+                    <th class="col-md-2">Ville</th>
+                    <th class="col-md-1">Etat</th>
+                    <th class="col-md-2">Blessures</th>
+                    <th class="col-md-2">Evacuation</th>
+                </tr>
+                <tr ng-repeat-start="victime in dataSecours.dataVictimes.data">
+                    <td class="col-md-1 alignCenter">
+                        <button class="btn btn-success btn-xs" ng-click="isVisibleForm(victime)"
+                                ng-class="{disabled: isDisabled}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-danger btn-xs" ng-controller="deleteVictimeCtrl"
+                                ng-click="deleteVictime('', victime.nom, victime.id)">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                        </button>
+                        <button class="btn btn-primary btn-xs" ng-if="!isVisibleDetails[$index]"
+                                ng-click="visibleDetails($index)">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        </button>
+                        <button class="btn btn-primary btn-xs" ng-if="isVisibleDetails[$index]"
+                                ng-click="visibleDetails($index)">
+                        <span class="glyphicon glyphicon-chevron-up"></span>
+                        </button>
+                    </td>
+                    <td>{{victime.nom}} {{victime.prenom}}</td>
+                    <td class="alignCenter">{{victime.naissance_date | dateToAge}}</td>
+                    <td>{{victime.adresse_commune}}</td>
+                    <td>{{victime.etat}}</td>
+                    <td>{{victime.blessures | displayBlessures}}</td>
+                    <td>{{victime.evacuation}}</td>
+                </tr>
+                <tr ng-if="isVisibleDetails[$index]" ng-repeat-end="">
+                    <td colspan="3">
+                        <p><label>Identité :</label> {{victime.nom}} {{victime.prenom}} - 
+                            <label>Sexe :</label> {{victime.sexe}}</p>
+                        
+                        <p><label>Date de naissance :</label> 
+                           {{victime.naissance_date | dateToISO | date:'dd/MM/yyyy'}}</p>
+                        
+                        <p><label>Lieu de naissance :</label>  {{victime.naissance_lieu}}</p>
+                        <p><label>Nationalité :</label>  {{victime.nationalite}}</p>
+                        <p><label>Etat :</label> {{victime.etat}}</p>
+                        <p><label>Blessures :</label> {{victime.blessures | displayBlessures}}</p>
+                        <p><label>Evacuation :</label>  {{victime.evacuation}}</p>
+                    </td>
+                    <td colspan="4">
+                        <p><label>Adresse :</label> {{victime.adresse}}</p>
+                        <p><label>Ville :</label> {{victime.adresse_commune}}</p>
+                        <p><label>Téléphone :</label>  {{victime.tph}}</p>
+                        <p><label>Profession :</label>  {{victime.profession}}</p>
+                        <p><label>Filiation :</label> {{victime.filiation}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

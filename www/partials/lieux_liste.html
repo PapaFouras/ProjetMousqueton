@@ -1,0 +1,15 @@
+    <div class="modal-header">
+        <h4 class="modal-title">Alerte Secours en Montagne</h4>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a ng-click="selected.item = item">{{item.lieu}} ({{item.altitude}} mètres) - {{item.massif}} {{item.commune}}</a>
+            </li>
+        </ul>
+        Lieu sélectionné : <b>{{selected.item.lieu}} ({{selected.item.altitude}} mètres) - {{selected.item.commune}}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    </div>

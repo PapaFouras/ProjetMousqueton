@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h4 class="modal-title">Alerte Secours en Montagne</h4>
+</div>
+<div class="modal-body">
+    <h4><label class="label label-primary">Compte rendu B.D.S.P - MISSION DIVERS</label></h4>
+    <div class="panel panel-primary">
+        <div class="panel-body backgroundColor">
+            <div class="row"> <!-- Début de row 1-->
+                <div class="col-md-12 form-group">
+                    <label><span class="label label-primary">Copiez le texte (Ctrl + C)</span></label>
+<!-- Corps du message pour le CRO de BDSP -->
+<textarea class="form-control" rows="15" onfocus="select()" ng-onfocus="true">
+
+1. ALERTE TRANSMISE PAR : {{dataSecours.data.alerte_origine}} 
+   LE {{gdhBdsp}}
+
+2. DEBUT DE MISSION : {{txtDebut}}
+   FIN DE MISSION   : {{txtFin}}
+
+3. LOCALISATION :
+   COMMUNE : {{dataSecours.data.loc_commune}}  DEPARTEMENT : ISERE   MASSIF : {{dataSecours.data.loc_massif}}
+   ALTITUDE : {{dataSecours.data.loc_alt}} mètres    LIEU :  {{dataSecours.data.loc_lieu}}  STATION DE :	CARROYAGE :
+
+4. NATURE DES LIEUX : MONTAGNE
+
+5. NATURE DE L INTERVENTION :
+  {{txtType}} {{txtHelico}}
+  {{txtMed}}
+
+6. MOYENS ENGAGES :
+   Personnel(s) : {{nbMoyens.pghm}} {{nbMoyens.smur}} {{nbMoyens.cyno}} {{txtAut}} 
+
+7. DISCIPLINE EXERCEE : {{dataSecours.data.acc_activites | dataToActivitesCourt}}
+
+8. BILAN HUMAIN :
+   {{txtVictimes}}
+
+9. CIRCONSTANCES : {{dataSecours.data.acc_rsgts}}
+
+10. IDENTIFICATION DU COS : PGHM 38
+
+BT
+
+</textarea>
+<!-- Corps du message pour le CRO de BDSP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="cancel()">Fermer</button>
+</div>
+
