@@ -52,5 +52,5 @@ switch ($dataType) {
         echo json_encode($data);
     break;
     };
-$bdd->closeCursor;
+//$bdd->closeCursor;
 ?>
