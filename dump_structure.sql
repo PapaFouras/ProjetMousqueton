@@ -5,6 +5,9 @@
 -- Dumped from database version 9.6.6
 -- Dumped by pg_dump version 10.5
 
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
