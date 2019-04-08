@@ -387,6 +387,6 @@ $pdf->MultiCell(0,4,$dataSecours[rsgts_mp]);
 $pdf->MultiCell(0,4,$dataSecours[rsgts_professionnel]);
 
 // Finalisation du PDF
-$bdd->closeCursor;
+//$bdd->closeCursor;
 $pdf->Output("RA ".$dataSecours[pv]."_PGHM_".$annee.".pdf","I");
 ?>

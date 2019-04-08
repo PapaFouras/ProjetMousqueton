@@ -47,6 +47,7 @@ switch ($crud) {
         $bdd->exec("DELETE FROM tab_moyens WHERE secours_id = $id");//OR CASCADING?
     break;
     case 'update' : // Update d'une fiche avec son Id
+
 	if ($field=="geom") {
 	//45124216 5878823
 	$lat = substr($data,0,2) . "." . substr($data,2,6);

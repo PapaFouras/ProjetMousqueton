@@ -1,5 +1,6 @@
 <?php
 // Récupération des données envoyées par myController
+
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 @$crud         =   $request->crud; // Type d'opération à effectuer (Add - Remove - Update)
@@ -26,7 +27,10 @@ $selectedYear = $annee[0]['annee'];
 switch ($crud) {
     case 'id' : // Récupération des données évennements 
         //$response = $bdd->query("SELECT id FROM tab_secours WHERE YEAR(alerte_gdh) = $selectedYear");
+		//echo "<script>alert($selectedYear)</script>"; 
+		//echo $selectedYear; 
 		$response = $bdd->query("SELECT id FROM tab_secours WHERE EXTRACT(YEAR FROM alerte_gdh) = $selectedYear ORDER BY id");
+		//echo "<script>alert(\"connection\")</script>"; 
 		$data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
     break;

@@ -24,5 +24,5 @@ switch ($crud) {
         $bdd->exec("UPDATE tab_config SET annee = '$data' WHERE id = 1");
     break;
 };
-$bdd->closeCursor;
+//$bdd->closeCursor;
 ?>

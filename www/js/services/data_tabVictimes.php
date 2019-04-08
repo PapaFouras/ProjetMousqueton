@@ -48,5 +48,5 @@ switch ($crud) {
         $bdd->exec("UPDATE tab_victimes SET $field = '$data' WHERE id = $id_victime");
     break;
 };
-$bdd->closeCursor;
+//$bdd->closeCursor;
 ?>

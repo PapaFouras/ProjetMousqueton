@@ -117,6 +117,6 @@ $pdf->Ln(5);
 $pdf->SetFont('DejaVu','B',8);
 $pdf->Cell(50, 7, "Total des interventions : ".count($dataSecours),'' ,1 ,'' ,true);
 $pdf->Ln(5);
-$bdd->closeCursor;
+//$bdd->closeCursor;
 $pdf->Output("Synthèse secours du $gdh_fin","I");
 ?>

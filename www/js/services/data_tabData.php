@@ -16,41 +16,52 @@ catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 switch ($dataType) {
+
     case 'nationalites' : // Récupération des données de lst_nationalités
-        $response = $bdd->query("SELECT pays FROM lst_nationalites WHERE pays LIKE '".$val."%'");
+	{
+		$response = $bdd->query("SELECT pays FROM lst_nationalites WHERE pays LIKE '".$val."%'");
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
-    break;
+		break;
+	}
     case 'communes' : // Récupération des données de lst_communes
+	{
         $response = $bdd->query("SELECT dept, commune FROM lst_communes WHERE commune LIKE '".$val."%'");
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
     break;
+	}
     case 'evacuation' : // Récupération des données de lst_evacuation
+	{
         $response = $bdd->query('SELECT * FROM lst_evacuation ORDER BY lieu_evacuation');
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
     break;
+	}
     case 'blessures' : // Récupération des données de lst_blessures
-        $response = $bdd->query('SELECT categorie, blessures FROM lst_blessures ORDER BY categorie, blessures');
+    {    $response = $bdd->query('SELECT categorie, blessures FROM lst_blessures ORDER BY categorie, blessures');
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
     break;
+	}
     case 'personnels' : // Récupération des données de lst_personnels
-        $response = $bdd->query('SELECT * FROM lst_personnels');
+	{   $response = $bdd->query('SELECT * FROM lst_personnels');
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
-    break;
+    break;}
     case 'activites' : // Récupération des données de lst_activites
-        $response = $bdd->query('SELECT categorie, activites FROM lst_activites');
+    {    $response = $bdd->query('SELECT categorie, activites FROM lst_activites');
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
     break;
+	}
     case 'massifs' : // Récupération des données de lst_massifs
-        $response = $bdd->query('SELECT * FROM lst_massifs ORDER BY massifs');
+	{
+	 $response = $bdd->query('SELECT * FROM lst_massifs ORDER BY massifs');
         $data = $response->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
     break;
+	}
     };
-//$bdd->closeCursor;
+//$response->closeCursor();
 ?>

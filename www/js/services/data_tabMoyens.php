@@ -42,5 +42,5 @@ switch ($crud) {
         $bdd->exec("DELETE FROM tab_moyens WHERE secours_id = $id_secours AND nom = '$moyen_nom' AND lieu = '$moyen_lieu'");
     break;
 };
-$bdd->closeCursor;
+//$bdd->closeCursor;
 ?>
