@@ -67,5 +67,5 @@ switch ($crud) {
     break;
 };
 // Fermeture de la connexion à la BDD
-//$bdd->closeCursor;
+$bdd = null;
 ?>

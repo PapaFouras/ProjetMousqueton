@@ -33,5 +33,5 @@ catch (Exception $e) {
 					                     tgi = '$tgi',
                                          unite = '$unite'
                                          WHERE id = 1");
-//$bdd->closeCursor;
+$bdd = null;
 ?>

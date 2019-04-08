@@ -70,5 +70,5 @@ switch ($crud) {
 	}
     break;
 };
-$bdd->closeCursor;
+$bdd = null;
 ?>

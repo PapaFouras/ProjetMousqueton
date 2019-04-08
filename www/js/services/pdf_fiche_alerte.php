@@ -459,6 +459,6 @@ while ($dataVictime = $selectVictimes->fetch()) {
 $selectVictimes->closeCursor();
 
 // Finalisation du PDF
-//$bdd->closeCursor;
+$bdd = null;
 $pdf->Output("Fiche de secours - N°".$id,"I");
 ?>

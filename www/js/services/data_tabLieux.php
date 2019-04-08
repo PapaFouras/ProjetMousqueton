@@ -36,5 +36,5 @@ switch ($crud) {
         echo json_encode($data);
     break;
 };
-//$bdd->closeCursor;
+$bdd = null;
 ?>

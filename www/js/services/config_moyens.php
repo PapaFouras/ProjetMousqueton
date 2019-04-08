@@ -114,5 +114,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // UPDATE
     
 };
 // Fermeture de la connexion
-//$bdd->closeCursor;
+$bdd = null;
 ?>

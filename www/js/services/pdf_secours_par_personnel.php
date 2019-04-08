@@ -58,6 +58,6 @@ foreach($totalSecours as $secours) {
     $pdf->Cell(55,7,$activites,'B',0);
     $pdf->Cell(55,7,$blessures,'B',1);
 };
-//$bdd->closeCursor;
+$bdd = null;
 $pdf->Output("Année ".$annee. " - Secours effectués par ".$personnel,"I");
 ?>

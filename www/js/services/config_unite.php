@@ -33,5 +33,5 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                                       WHERE id = 1");
 }
 // Fermeture de la connexion
-//$bdd->closeCursor;
+$bdd = null;
 ?>

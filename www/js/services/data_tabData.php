@@ -63,5 +63,5 @@ switch ($dataType) {
     break;
 	}
     };
-//$response->closeCursor();
+$bdd = null;
 ?>

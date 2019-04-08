@@ -37,5 +37,5 @@ switch ($crud) {
                     WHERE deroulement_id = $id_evenement");
     break;
 };
-//$bdd->closeCursor;
+$bdd = null;
 ?>
