@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Test Database</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+  <!-- Code Mirror -->
+  <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+  <!-- Fonts -->
+  <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+  <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+  <!-- Salvattore -->
+  <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+  <!-- SchemaSpy -->
+  <link rel="stylesheet" href="schemaSpy.css">
+  
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="bower/html5shiv/html5shiv.min.js"></script>
+  <script src="bower/respond/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand"><b>Test</b> Database</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+			<li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+			<li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+			<li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+			<li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>				
+			<li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+			<li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Main content -->
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>Columns</h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+			  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+              <h3 class="box-title">Columns</h3>
+            </div>	
+            <div class="box-body">
+				<div class="row">
+					<div id="button_group_one" class="col-md-3 col-sm-6"></div>
+					<div id="button_group_two" class="col-md-2 col-sm-4 pull-right text-right"></div>
+				</div>
+				<table id="column_table" class="table table-bordered table-striped dataTable" role="grid">
+				<thead align='left'>
+					<tr>
+					  <th>Table</th>
+					  <th>Type</th>
+					  <th>Column</th>
+					  <th>Type</th>
+					  <th>Size</th>
+					  <th title='Are nulls allowed?'>Nulls</th>
+					  <th title='Is column automatically updated?'>Auto</th>
+					  <th title='Default value'>Default</th>
+					  <th title='Comments' class="toggle"><span>Comments</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_recherche</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) La victime est recherchée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_activite_sportive</td>
+					 <td>Table</td>
+					 <td>as_categorie</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Catégorie de l'activité sportive</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>r_table_name</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_treuillage</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Treuillage</p></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td>f_table_catalog</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_nationalite</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>na_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la nationalité</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>blocksize_y</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vi_fk_nationalite_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nationalité de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td>coord_dimension</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vi_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>r_table_schema</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>out_db</td>
+					 <td>_bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_perche</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Perche</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_ref_sys</td>
+					 <td>Table</td>
+					 <td>proj4text</td>
+					 <td>varchar</td>
+					 <td>2048</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_condition_meteo</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>cm_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la condition météorologique</p></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td>f_table_schema</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_activite_sportive</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>as_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de l'activité sportive</p></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>srid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_massif</td>
+					 <td>Table</td>
+					 <td>ma_geom</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Coordonnées géométriques du massif</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>li_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant du lieu</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_sexe</td>
+					 <td>varchar</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Sexe de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_ref_sys</td>
+					 <td>Table</td>
+					 <td>srtext</td>
+					 <td>varchar</td>
+					 <td>2048</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_localisation</td>
+					 <td>Table</td>
+					 <td>al_complement</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Complément de localisation</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_filiation</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Noms et prénoms de la famille de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ags_fk_entite_secours_id_cs</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID du chef de salle (anciennement 'gs')</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ags_fk_entite_secours_id_op</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'officier de permanence</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>acc_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'alerte associée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_profession</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Profession de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>acc_fk_activite_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'activité sportive associée à l'accident</p></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td>f_table_name</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_zone_geographique</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>zg_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la zone géographique</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu</td>
+					 <td>Table</td>
+					 <td>li_gps</td>
+					 <td>varchar</td>
+					 <td>15</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Coordonnées GPS du lieu</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>r_raster_column</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_lieu</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Location de l'entité de secours</p></td>
+					</tr>
+					<tr>
+					 <td>asm_intervenant</td>
+					 <td>Table</td>
+					 <td>in_nom</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de l'intervenant</p></td>
+					</tr>
+					<tr>
+					 <td>asm_moyen_engage</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>mo_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'alerte associée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu</td>
+					 <td>Table</td>
+					 <td>li_altitude</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Altitude (m) du lieu</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>overview_factor</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu_evacuation</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>le_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant du lieu d'évacuation</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_bilan</td>
+					 <td>varchar</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Bilan vital</p></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_grade</td>
+					 <td>varchar</td>
+					 <td>3</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Grade du personnel</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_conference</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) S'il y a eu conférence entre les différents organismes de secours</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_session</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Session</p></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_prenom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Prénom du personnel</p></td>
+					</tr>
+					<tr>
+					 <td>asm_configuration_unite</td>
+					 <td>Table</td>
+					 <td>cu_annee</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Année actuelle</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_ref_sys</td>
+					 <td>Table</td>
+					 <td>auth_srid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_deroulement</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>dr_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'alerte associée</p></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td>type</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>r_raster_column</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_organisme</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Organisme auquel appartient l'entité de secours</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>regular_blocking</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_hc</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Haute Cinétique</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_massif</td>
+					 <td>varchar</td>
+					 <td>50</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom du massif</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_gdh</td>
+					 <td>timestamp</td>
+					 <td>29</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>GDP (Groupe-Date-Heure) de l'alerte</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_recherche_personne</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description de la personne recherchée</p></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td>f_table_name</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_utm</td>
+					 <td>bpchar</td>
+					 <td>20</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Universal Transverse Mercator</p></td>
+					</tr>
+					<tr>
+					 <td>asm_configuration_unite</td>
+					 <td>Table</td>
+					 <td>cu_unite</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de l'unité</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_confrequerant</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Requérant présent lors de la conférence</p></td>
+					</tr>
+					<tr>
+					 <td>asm_etat_clinique</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ec_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de l'etat clinique</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_telnat</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Numéro national</p></td>
+					</tr>
+					<tr>
+					 <td>asm_moyen_engage</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>mo_fk_entite_secours_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'entité de secours engagée pour la dite alerte</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_pci</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) PCI</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>r_table_schema</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td>ags_pulsar</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>PULS</p></td>
+					</tr>
+					<tr>
+					 <td>asm_zone_geographique</td>
+					 <td>Table</td>
+					 <td>zg_nom</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de la zone géographique</p></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_type</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Médecin, secouriste, équipage, hélicoptère, équipe cynophile, ou autre</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>li_fk_massif_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID du massif associé</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vi_fk_lieu_evacuation_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID du lieu d'évacuation</p></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td>f_geography_column</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_unite</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;PG38&#39;::character varying</td>
+					 <td><p>Unite</p></td>
+					</tr>
+					<tr>
+					 <td>asm_activite_sportive</td>
+					 <td>Table</td>
+					 <td>as_nom</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de l'activité sportive</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>o_table_catalog</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_mid</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Mid</p></td>
+					</tr>
+					<tr>
+					 <td>asm_deroulement</td>
+					 <td>Table</td>
+					 <td>dr_actions</td>
+					 <td>_text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Liste des actions menées lors des opérations (tableau). Entrée correspondante avec dr_actions_gdh.</p></td>
+					</tr>
+					<tr>
+					 <td>asm_blessure</td>
+					 <td>Table</td>
+					 <td>bl_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom (description) de la blessure</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_collier</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Collier</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_ref_sys</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>srid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_nationalite</td>
+					 <td>Table</td>
+					 <td>na_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de la nationalité</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vi_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé secondaire, identifiant de l'alerte associée à la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ags_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'alerte associée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_commune</td>
+					 <td>Table</td>
+					 <td>co_nom</td>
+					 <td>varchar</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de la commune</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_ref_sys</td>
+					 <td>Table</td>
+					 <td>auth_name</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_blessure</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>bl_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la blessure</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_circonstances</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Renseignements sur les circonstances de l'accident</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_o2</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - O2</p></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de l'entité de secours</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>r_table_name</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>es_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, Identifiant de l'entité de secours</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_telephone</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Téléphone de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_gps</td>
+					 <td>varchar</td>
+					 <td>15</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Coordonnées GPS</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_localisation</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>al_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la localisation de l'alerte</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu</td>
+					 <td>Table</td>
+					 <td>li_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom du lieu</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_attelle</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Attelle</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>srid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_blessure</td>
+					 <td>Table</td>
+					 <td>bl_categorie</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Catégorie de la blessure</p></td>
+					</tr>
+					<tr>
+					 <td>asm_configuration_unite</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>cu_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de l'unité de configuration</p></td>
+					</tr>
+					<tr>
+					 <td>asm_commune</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>co_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la commune</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>acc_fk_blessure_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de la blessure</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_blessures</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Liste des blessures de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_confcorg</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) CORG présent lors de la conférence</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_telephone</td>
+					 <td>varchar</td>
+					 <td>30</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Numéro de téléphone utilisé pour donner l'alerte</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>num_bands</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_etat_vent</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ev_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de l'état du vent</p></td>
+					</tr>
+					<tr>
+					 <td>asm_massif</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ma_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant du massif</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>spatial_index</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_commune</td>
+					 <td>Table</td>
+					 <td>co_departement</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Département de la commune</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td>ags_cro</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>CRO</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_prenom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Prénom de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>rg_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant des renseignements</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_altitude</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Altitude du lieu</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>nodata_values</td>
+					 <td>_float8</td>
+					 <td>17</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_localisation</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>al_fk_lieu_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID du lieu de l'alerte</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ag_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, Identifiant de l'alerte</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_lieu</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom du lieu</p></td>
+					</tr>
+					<tr>
+					 <td>asm_deroulement</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>dr_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant du déroulement des opérations</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ags_fk_entite_secours_id_planton</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID du planton</p></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_op</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Officier de permanence (booléen)</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_confsamu</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) SAMU présent lors de la conférence</p></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td>type</td>
+					 <td>varchar</td>
+					 <td>30</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td>coord_dimension</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>r_table_catalog</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_moyen</td>
+					 <td>varchar</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Moyen par lequel l'alerte a été donnée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_localisation</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>al_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'alerte associée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>acc_fk_etat_vent_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'état venteux</p></td>
+					</tr>
+					<tr>
+					 <td>asm_entite_secours</td>
+					 <td>Table</td>
+					 <td>es_tph</td>
+					 <td>varchar</td>
+					 <td>12</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Numéro de téléphone</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_sexe</td>
+					 <td>varchar</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Sexe de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_etat_vent</td>
+					 <td>Table</td>
+					 <td>ev_description</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description de l'état du vent</p></td>
+					</tr>
+					<tr>
+					 <td>asm_moyen_engage</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>mo_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant du duo alerte-moyen engagé</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ag_fk_intervenant_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'intervenant</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>o_raster_column</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_deroulement</td>
+					 <td>Table</td>
+					 <td>dr_actions_gdh</td>
+					 <td>_timestamp</td>
+					 <td>29</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>GDH (Groupe Date-heure) de chaque action menée lors des opérations (tableau). Entrée correspondante avec dr_actions.</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>li_fk_commune_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de la commune associée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vi_fk_commune_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, commune d'habitation</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_relevage</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Relevage</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ags_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la gestion du secours</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_geom</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Coordonnées géométriques</p></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>srid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>blocksize_x</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>acc_fk_condition_meteo_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de la condition météorologique</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>scale_x</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>geometry_columns</td>
+					 <td>View</td>
+					 <td>f_geometry_column</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>same_alignment</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_configuration_unite</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>cu_fk_commune_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, commune de l'unité</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>de_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de la data_exchange</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_confpghm</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) PGHM présent lors de la conférence</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>acc_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_telint</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Numéro international</p></td>
+					</tr>
+					<tr>
+					 <td>asm_configuration_unite</td>
+					 <td>Table</td>
+					 <td>cu_code_unite</td>
+					 <td>varchar</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Code de l'unité</p></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_tgi</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Tribunal de Grande Instance</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td>ags_pv</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Numéro de PV</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_recherche_vehicule</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Informations sur le/les véhicule(s) de la personne recherchée</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>r_table_catalog</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td>f_table_catalog</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>o_table_schema</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_data_exchange</td>
+					 <td>Table</td>
+					 <td>de_commune</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de la commune</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_confcodis</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) CODIS présent lors de la conférence</p></td>
+					</tr>
+					<tr>
+					 <td>asm_massif</td>
+					 <td>Table</td>
+					 <td>ma_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom du massif</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_naissance_lieu</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Lieu de naissance de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>asm_intervenant</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>in_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td><p>Clé primaire, identifiant de l'intervenant</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vi_fk_etat_clinique_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, identifiant de l'état clinique</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>scale_y</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td>ags_fiche</td>
+					 <td>int2</td>
+					 <td>5</td>
+					 <td title='nullable'>√</td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;num_fiche_annee&#39;::regclass)</td>
+					 <td><p>Numéro de fiche</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_sensible</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Caractère sensible</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_localisation</td>
+					 <td>Table</td>
+					 <td>al_utm</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Localisation UTM</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_requerant</td>
+					 <td>varchar</td>
+					 <td>60</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Requérant de l'alerte</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>extent</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_naissance_date</td>
+					 <td>timestamp</td>
+					 <td>29</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Date de naissance de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>geography_columns</td>
+					 <td>View</td>
+					 <td>f_table_schema</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_condition_meteo</td>
+					 <td>Table</td>
+					 <td>cm_description</td>
+					 <td>varchar</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description de la condition météorologique</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_ked</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - KED</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mesures_prises</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Renseignements sur les mesures prises lors de l'accident</p></td>
+					</tr>
+					<tr>
+					 <td>asm_lieu_evacuation</td>
+					 <td>Table</td>
+					 <td>le_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom du ieu d'évacuation</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_general</td>
+					 <td>Table</td>
+					 <td>ag_origine</td>
+					 <td>varchar</td>
+					 <td>20</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Origine de l'alerte (organisme)</p></td>
+					</tr>
+					<tr>
+					 <td>raster_overviews</td>
+					 <td>View</td>
+					 <td>o_table_name</td>
+					 <td>name</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_gestion_secours</td>
+					 <td>Table</td>
+					 <td>ags_bsm</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>BSM</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_nom</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Nom de la victime</p></td>
+					</tr>
+					<tr>
+					 <td>raster_columns</td>
+					 <td>View</td>
+					 <td>pixel_types</td>
+					 <td>_text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>rg_fk_alerte_general_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de l'alerte associée</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>rg_fk_entite_secours_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Clé étrangère, ID de la personne ayant suivi l'affaire</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_gdh</td>
+					 <td>timestamp</td>
+					 <td>29</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>GDH (Groupe Date-Heure) de l'accident</p></td>
+					</tr>
+					<tr>
+					 <td>asm_alerte_accident</td>
+					 <td>Table</td>
+					 <td>acc_hemorragie</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) hémorragie</p></td>
+					</tr>
+					<tr>
+					 <td>asm_etat_clinique</td>
+					 <td>Table</td>
+					 <td>ec_description</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description de l'état clinique</p></td>
+					</tr>
+					<tr>
+					 <td>asm_renseignement</td>
+					 <td>Table</td>
+					 <td>rg_mp_mam</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>(Booléen) Mesure prise - Mam</p></td>
+					</tr>
+					<tr>
+					 <td>asm_victime</td>
+					 <td>Table</td>
+					 <td>vi_adresse</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Adresse de la victime</p></td>
+					</tr>
+								</tbody>
+				</table>				
+			</div>
+		</div>	
+      </section>
+	  <script>
+          var config = {
+	          pagination: true
+          }
+	  </script>    
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div>
+      <div class="pull-right hidden-xs">
+        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+      </div>
+      <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.0.0</a></strong>
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+<script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+<script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+<!-- SheetJS -->
+<script src="bower/js-xlsx/xlsx.full.min.js"></script>
+<!-- pdfmake -->
+<script src="bower/pdfmake/pdfmake.min.js"></script>
+<script src="bower/pdfmake/vfs_fonts.js"></script>
+<!-- SlimScroll -->
+<script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+<!-- Salvattore -->
+<script src="bower/salvattore/salvattore.min.js"></script>
+<!-- AnchorJS -->
+<script src="bower/anchor-js/anchor.min.js"></script>
+<!-- CodeMirror -->
+<script src="bower/codemirror/codemirror.js"></script>
+<script src="bower/codemirror/sql.js"></script>
+<!-- AdminLTE App -->
+<script src="bower/admin-lte/dist/js/app.min.js"></script>
+<script src="column.js"></script>
+<script src="schemaSpy.js"></script>
+</body>
+</html>

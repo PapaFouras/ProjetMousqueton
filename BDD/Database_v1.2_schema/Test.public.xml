@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="Test" schema="public" type="PostgreSQL - 11.2">
+   <tables>
+      <table name="asm_activite_sportive" numRows="0" remarks="Activité sportive" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="as_id" nullable="false" remarks="Clé primaire, identifiant de l'activité sportive" size="10" type="int4">
+            <child column="acc_fk_activite_id" foreignKey="asm_alerte_accident_acc_fk_activite_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_accident"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="as_categorie" nullable="false" remarks="Catégorie de l'activité sportive" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="as_nom" nullable="false" remarks="Nom de l'activité sportive" size="100" type="varchar"/>
+         <primaryKey column="as_id" sequenceNumberInPK="1"/>
+         <index name="asm_activite_sportive_pkey" unique="true">
+            <column ascending="true" name="as_id"/>
+         </index>
+      </table>
+      <table name="asm_alerte_accident" numRows="0" remarks="Informations sur l'accident (section 'Accident' de l'onglet 'Alerte')" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="acc_id" nullable="false" remarks="Clé étrangère, ID de l'alerte associée" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="acc_fk_alerte_general_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_alerte_accident_acc_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="2" name="acc_gdh" nullable="true" remarks="GDH (Groupe Date-Heure) de l'accident" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="3" name="acc_fk_activite_id" nullable="true" remarks="Clé étrangère, ID de l'activité sportive associée à l'accident" size="10" type="int4">
+            <parent column="as_id" foreignKey="asm_alerte_accident_acc_fk_activite_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_activite_sportive"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="acc_sexe" nullable="true" remarks="Sexe de la victime" size="1" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="acc_fk_blessure_id" nullable="true" remarks="Clé étrangère, ID de la blessure" size="10" type="int4">
+            <parent column="bl_id" foreignKey="asm_alerte_accident_acc_fk_blessure_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_blessure"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="acc_bilan" nullable="true" remarks="Bilan vital" size="1" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="acc_recherche" nullable="true" remarks="(Booléen) La victime est recherchée" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="8" name="acc_recherche_vehicule" nullable="true" remarks="Informations sur le/les véhicule(s) de la personne recherchée" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="acc_recherche_personne" nullable="true" remarks="Description de la personne recherchée" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="acc_hemorragie" nullable="true" remarks="(Booléen) hémorragie" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="11" name="acc_fk_condition_meteo_id" nullable="true" remarks="Clé étrangère, ID de la condition météorologique" size="10" type="int4">
+            <parent column="cm_id" foreignKey="asm_alerte_accident_acc_fk_condition_meteo_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_condition_meteo"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="12" name="acc_fk_etat_vent_id" nullable="true" remarks="Clé étrangère, ID de l'état venteux" size="10" type="int4">
+            <parent column="ev_id" foreignKey="asm_alerte_accident_acc_fk_etat_vent_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_etat_vent"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="13" name="acc_pci" nullable="true" remarks="(Booléen) PCI" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="14" name="acc_hc" nullable="true" remarks="(Booléen) Haute Cinétique" size="1" type="bool"/>
+         <primaryKey column="acc_id" sequenceNumberInPK="1"/>
+         <index name="asm_alerte_accident_pkey" unique="true">
+            <column ascending="true" name="acc_id"/>
+         </index>
+      </table>
+      <table name="asm_alerte_general" numRows="0" remarks="Informations générales d'une alerte (section 'Alerte' de l'onglet 'Alerte')" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ag_id" nullable="false" remarks="Clé primaire, Identifiant de l'alerte" size="10" type="int4">
+            <child column="acc_fk_alerte_general_id" foreignKey="asm_alerte_accident_acc_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_accident"/>
+            <child column="ags_fk_alerte_general_id" foreignKey="asm_alerte_gestion_secours_ags_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_gestion_secours"/>
+            <child column="al_fk_alerte_general_id" foreignKey="asm_alerte_localisation_al_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_localisation"/>
+            <child column="dr_fk_alerte_general_id" foreignKey="asm_deroulement_dr_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_deroulement"/>
+            <child column="mo_fk_alerte_general_id" foreignKey="asm_moyen_engage_mo_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_moyen_engage"/>
+            <child column="rg_fk_alerte_general_id" foreignKey="asm_renseignement_rg_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_renseignement"/>
+            <child column="vi_fk_alerte_general_id" foreignKey="asm_victime_vi_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_victime"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="1" name="ag_gdh" nullable="true" remarks="GDP (Groupe-Date-Heure) de l'alerte" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="2" name="ag_moyen" nullable="true" remarks="Moyen par lequel l'alerte a été donnée" size="10" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="ag_origine" nullable="true" remarks="Origine de l'alerte (organisme)" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="ag_conference" nullable="true" remarks="(Booléen) S'il y a eu conférence entre les différents organismes de secours" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="5" name="ag_confcodis" nullable="true" remarks="(Booléen) CODIS présent lors de la conférence" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="ag_confsamu" nullable="true" remarks="(Booléen) SAMU présent lors de la conférence" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="ag_confcorg" nullable="true" remarks="(Booléen) CORG présent lors de la conférence" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="8" name="ag_confpghm" nullable="true" remarks="(Booléen) PGHM présent lors de la conférence" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="9" name="ag_confrequerant" nullable="true" remarks="(Booléen) Requérant présent lors de la conférence" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="10" name="ag_telephone" nullable="true" remarks="Numéro de téléphone utilisé pour donner l'alerte" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="11" name="ag_telint" nullable="true" remarks="(Booléen) Numéro international" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="12" name="ag_telnat" nullable="true" remarks="(Booléen) Numéro national" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="13" name="ag_requerant" nullable="true" remarks="Requérant de l'alerte" size="60" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="14" name="ag_fk_intervenant_id" nullable="true" remarks="Clé étrangère, ID de l'intervenant" size="10" type="int4">
+            <parent column="in_id" foreignKey="asm_alerte_general_ag_fk_intervenant_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_intervenant"/>
+         </column>
+         <primaryKey column="ag_id" sequenceNumberInPK="1"/>
+         <index name="asm_alerte_general_pkey" unique="true">
+            <column ascending="true" name="ag_id"/>
+         </index>
+      </table>
+      <table name="asm_alerte_gestion_secours" numRows="0" remarks="Informations sur la gestion du secours (section 'Gestion du secours' de l'onglet 'Alerte')" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ags_id" nullable="false" remarks="Clé primaire, identifiant de la gestion du secours" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="ags_fk_alerte_general_id" nullable="false" remarks="Clé étrangère, ID de l'alerte associée" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_alerte_gestion_secours_ags_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="ags_fk_entite_secours_id_cs" nullable="true" remarks="Clé étrangère, ID du chef de salle (anciennement 'gs')" size="10" type="int4">
+            <parent column="es_id" foreignKey="asm_alerte_gestion_secours_ags_fk_entite_secours_id_cs_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_entite_secours"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="ags_fk_entite_secours_id_planton" nullable="true" remarks="Clé étrangère, ID du planton" size="10" type="int4">
+            <parent column="es_id" foreignKey="asm_alerte_gestion_secours_ags_fk_entite_secours_id_planto_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_entite_secours"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="ags_pv" nullable="true" remarks="Numéro de PV" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="ags_fk_entite_secours_id_op" nullable="true" remarks="Clé étrangère, ID de l'officier de permanence" size="10" type="int4">
+            <parent column="es_id" foreignKey="asm_alerte_gestion_secours_ags_fk_entite_secours_id_op_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_entite_secours"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="ags_bsm" nullable="true" remarks="BSM" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="ags_cro" nullable="true" remarks="CRO" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="8" name="ags_pulsar" nullable="true" remarks="PULS" size="1" type="bool"/>
+         <column autoUpdated="true" defaultValue="nextval('num_fiche_annee'::regclass)" digits="0" id="9" name="ags_fiche" nullable="true" remarks="Numéro de fiche" size="5" type="int2"/>
+         <primaryKey column="ags_id" sequenceNumberInPK="1"/>
+         <index name="asm_alerte_gestion_secours_pkey" unique="true">
+            <column ascending="true" name="ags_id"/>
+         </index>
+      </table>
+      <table name="asm_alerte_localisation" numRows="0" remarks="Localisation de l'alerte (section 'Localisation' de l'onglet 'Alerte')" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="al_id" nullable="false" remarks="Clé primaire, identifiant de la localisation de l'alerte" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="al_fk_alerte_general_id" nullable="false" remarks="Clé étrangère, ID de l'alerte associée" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_alerte_localisation_al_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="al_fk_lieu_id" nullable="true" remarks="Clé étrangère, ID du lieu de l'alerte" size="10" type="int4">
+            <parent column="li_id" foreignKey="asm_alerte_localisation_al_fk_lieu_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_lieu"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="al_complement" nullable="true" remarks="Complément de localisation" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="al_utm" nullable="true" remarks="Localisation UTM" size="2147483647" type="varchar"/>
+         <primaryKey column="al_id" sequenceNumberInPK="1"/>
+         <index name="asm_alerte_localisation_pkey" unique="true">
+            <column ascending="true" name="al_id"/>
+         </index>
+      </table>
+      <table name="asm_blessure" numRows="0" remarks="Blessure" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="bl_id" nullable="false" remarks="Clé primaire, identifiant de la blessure" size="10" type="int4">
+            <child column="acc_fk_blessure_id" foreignKey="asm_alerte_accident_acc_fk_blessure_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_accident"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="bl_categorie" nullable="false" remarks="Catégorie de la blessure" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="bl_nom" nullable="false" remarks="Nom (description) de la blessure" size="256" type="varchar"/>
+         <primaryKey column="bl_id" sequenceNumberInPK="1"/>
+         <index name="asm_blessure_pkey" unique="true">
+            <column ascending="true" name="bl_id"/>
+         </index>
+      </table>
+      <table name="asm_commune" numRows="0" remarks="LCommune française" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="co_id" nullable="false" remarks="Clé primaire, identifiant de la commune" size="10" type="int4">
+            <child column="cu_fk_commune_id" foreignKey="asm_configuration_unite_cu_fk_commune_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_configuration_unite"/>
+            <child column="li_fk_commune_id" foreignKey="asm_lieu_li_fk_commune_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_lieu"/>
+            <child column="vi_fk_commune_id" foreignKey="asm_victime_vi_fk_commune_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_victime"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="co_departement" nullable="false" remarks="Département de la commune" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="co_nom" nullable="false" remarks="Nom de la commune" size="60" type="varchar"/>
+         <primaryKey column="co_id" sequenceNumberInPK="1"/>
+         <index name="asm_commune_pkey" unique="true">
+            <column ascending="true" name="co_id"/>
+         </index>
+      </table>
+      <table name="asm_condition_meteo" numRows="0" remarks="Condition météorologique" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="cm_id" nullable="false" remarks="Clé primaire, identifiant de la condition météorologique" size="10" type="int4">
+            <child column="acc_fk_condition_meteo_id" foreignKey="asm_alerte_accident_acc_fk_condition_meteo_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_accident"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="cm_description" nullable="false" remarks="Description de la condition météorologique" size="100" type="varchar"/>
+         <primaryKey column="cm_id" sequenceNumberInPK="1"/>
+         <index name="asm_condition_meteo_pkey" unique="true">
+            <column ascending="true" name="cm_id"/>
+         </index>
+      </table>
+      <table name="asm_configuration_unite" numRows="0" remarks="Unité gérant les alertes et les configurations (Mode avancé, configuration unité)" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="cu_id" nullable="false" remarks="Clé primaire, identifiant de l'unité de configuration" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="cu_annee" nullable="true" remarks="Année actuelle" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="2" name="cu_unite" nullable="true" remarks="Nom de l'unité" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="cu_code_unite" nullable="true" remarks="Code de l'unité" size="10" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="cu_fk_commune_id" nullable="true" remarks="Clé étrangère, commune de l'unité" size="10" type="int4">
+            <parent column="co_id" foreignKey="asm_configuration_unite_cu_fk_commune_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_commune"/>
+         </column>
+         <primaryKey column="cu_id" sequenceNumberInPK="1"/>
+         <index name="asm_configuration_unite_pkey" unique="true">
+            <column ascending="true" name="cu_id"/>
+         </index>
+      </table>
+      <table name="asm_data_exchange" numRows="0" remarks="Lieu ajouté via l'outil cartographique" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="de_id" nullable="false" remarks="Clé primaire, identifiant de la data_exchange" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="de_lieu" nullable="true" remarks="Nom du lieu" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="de_commune" nullable="true" remarks="Nom de la commune" size="100" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="de_altitude" nullable="true" remarks="Altitude du lieu" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="de_gps" nullable="false" remarks="Coordonnées GPS" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="de_massif" nullable="true" remarks="Nom du massif" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="de_geom" nullable="true" remarks="Coordonnées géométriques" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" defaultValue="'PG38'::character varying" digits="0" id="7" name="de_unite" nullable="true" remarks="Unite" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="de_session" nullable="true" remarks="Session" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="de_utm" nullable="true" remarks="Universal Transverse Mercator" size="20" type="bpchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="de_tgi" nullable="true" remarks="Tribunal de Grande Instance" size="100" type="varchar"/>
+         <primaryKey column="de_id" sequenceNumberInPK="1"/>
+         <index name="asm_data_exchange_pkey" unique="true">
+            <column ascending="true" name="de_id"/>
+         </index>
+      </table>
+      <table name="asm_deroulement" numRows="0" remarks="Déroulement des opérations liés à une alerte (onglet 'Déroulement')" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="dr_id" nullable="false" remarks="Clé primaire, identifiant du déroulement des opérations" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="dr_fk_alerte_general_id" nullable="false" remarks="Clé étrangère, ID de l'alerte associée" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_deroulement_dr_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="2" name="dr_actions_gdh" nullable="false" remarks="GDH (Groupe Date-heure) de chaque action menée lors des opérations (tableau). Entrée correspondante avec dr_actions." size="29" type="_timestamp"/>
+         <column autoUpdated="false" digits="0" id="3" name="dr_actions" nullable="true" remarks="Liste des actions menées lors des opérations (tableau). Entrée correspondante avec dr_actions_gdh." size="2147483647" type="_text"/>
+         <primaryKey column="dr_id" sequenceNumberInPK="1"/>
+         <index name="asm_deroulement_pkey" unique="true">
+            <column ascending="true" name="dr_id"/>
+         </index>
+      </table>
+      <table name="asm_entite_secours" numRows="0" remarks="Entité de secours (personnel soignant, secouristes ou équipages, hélicoptère)" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="es_id" nullable="false" remarks="Clé primaire, Identifiant de l'entité de secours" size="10" type="int4">
+            <child column="ags_fk_entite_secours_id_cs" foreignKey="asm_alerte_gestion_secours_ags_fk_entite_secours_id_cs_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_gestion_secours"/>
+            <child column="ags_fk_entite_secours_id_op" foreignKey="asm_alerte_gestion_secours_ags_fk_entite_secours_id_op_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_gestion_secours"/>
+            <child column="ags_fk_entite_secours_id_planton" foreignKey="asm_alerte_gestion_secours_ags_fk_entite_secours_id_planto_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_gestion_secours"/>
+            <child column="mo_fk_entite_secours_id" foreignKey="asm_moyen_engage_mo_fk_entite_secours_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_moyen_engage"/>
+            <child column="rg_fk_entite_secours_id" foreignKey="asm_renseignement_rg_fk_entite_secours_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_renseignement"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="es_type" nullable="true" remarks="Médecin, secouriste, équipage, hélicoptère, équipe cynophile, ou autre" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="es_organisme" nullable="true" remarks="Organisme auquel appartient l'entité de secours" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="es_lieu" nullable="true" remarks="Location de l'entité de secours" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="es_nom" nullable="true" remarks="Nom de l'entité de secours" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="es_prenom" nullable="true" remarks="Prénom du personnel" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="es_grade" nullable="true" remarks="Grade du personnel" size="3" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="es_tph" nullable="true" remarks="Numéro de téléphone" size="12" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="es_op" nullable="true" remarks="Officier de permanence (booléen)" size="1" type="bool"/>
+         <primaryKey column="es_id" sequenceNumberInPK="1"/>
+         <index name="asm_entite_secours_pkey" unique="true">
+            <column ascending="true" name="es_id"/>
+         </index>
+      </table>
+      <table name="asm_etat_clinique" numRows="0" remarks="Etat clinique" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ec_id" nullable="false" remarks="Clé primaire, identifiant de l'etat clinique" size="10" type="int4">
+            <child column="vi_fk_etat_clinique_id" foreignKey="asm_victime_vi_fk_etat_clinique_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_victime"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ec_description" nullable="false" remarks="Description de l'état clinique" size="256" type="varchar"/>
+         <primaryKey column="ec_id" sequenceNumberInPK="1"/>
+         <index name="asm_etat_clinique_pkey" unique="true">
+            <column ascending="true" name="ec_id"/>
+         </index>
+      </table>
+      <table name="asm_etat_vent" numRows="0" remarks="Etat du vent" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ev_id" nullable="false" remarks="Clé primaire, identifiant de l'état du vent" size="10" type="int4">
+            <child column="acc_fk_etat_vent_id" foreignKey="asm_alerte_accident_acc_fk_etat_vent_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_accident"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ev_description" nullable="false" remarks="Description de l'état du vent" size="100" type="varchar"/>
+         <primaryKey column="ev_id" sequenceNumberInPK="1"/>
+         <index name="asm_etat_vent_pkey" unique="true">
+            <column ascending="true" name="ev_id"/>
+         </index>
+      </table>
+      <table name="asm_intervenant" numRows="0" remarks="Intervenant" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="in_id" nullable="false" remarks="Clé primaire, identifiant de l'intervenant" size="10" type="int4">
+            <child column="ag_fk_intervenant_id" foreignKey="asm_alerte_general_ag_fk_intervenant_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="in_nom" nullable="false" remarks="Nom de l'intervenant" size="100" type="varchar"/>
+         <primaryKey column="in_id" sequenceNumberInPK="1"/>
+         <index name="asm_intervenant_pkey" unique="true">
+            <column ascending="true" name="in_id"/>
+         </index>
+      </table>
+      <table name="asm_lieu" numRows="0" remarks="Lieu connu" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="li_id" nullable="false" remarks="Clé primaire, identifiant du lieu" size="10" type="int4">
+            <child column="al_fk_lieu_id" foreignKey="asm_alerte_localisation_al_fk_lieu_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_alerte_localisation"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="li_nom" nullable="false" remarks="Nom du lieu" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="li_fk_massif_id" nullable="false" remarks="Clé étrangère, ID du massif associé" size="10" type="int4">
+            <parent column="ma_id" foreignKey="asm_lieu_li_fk_massif_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_massif"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="li_fk_commune_id" nullable="false" remarks="Clé étrangère, ID de la commune associée" size="10" type="int4">
+            <parent column="co_id" foreignKey="asm_lieu_li_fk_commune_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_commune"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="li_altitude" nullable="false" remarks="Altitude (m) du lieu" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="li_gps" nullable="false" remarks="Coordonnées GPS du lieu" size="15" type="varchar"/>
+         <primaryKey column="li_id" sequenceNumberInPK="1"/>
+         <index name="asm_lieu_pkey" unique="true">
+            <column ascending="true" name="li_id"/>
+         </index>
+      </table>
+      <table name="asm_lieu_evacuation" numRows="0" remarks="Lieu d'évacuation des victimes" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="le_id" nullable="false" remarks="Clé primaire, identifiant du lieu d'évacuation" size="10" type="int4">
+            <child column="vi_fk_lieu_evacuation_id" foreignKey="asm_victime_vi_fk_lieu_evacuation_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_victime"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="le_nom" nullable="false" remarks="Nom du ieu d'évacuation" size="256" type="varchar"/>
+         <primaryKey column="le_id" sequenceNumberInPK="1"/>
+         <index name="asm_lieu_evacuation_pkey" unique="true">
+            <column ascending="true" name="le_id"/>
+         </index>
+      </table>
+      <table name="asm_massif" numRows="0" remarks="Massif montagneux" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ma_id" nullable="false" remarks="Clé primaire, identifiant du massif" size="10" type="int4">
+            <child column="li_fk_massif_id" foreignKey="asm_lieu_li_fk_massif_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_lieu"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ma_nom" nullable="false" remarks="Nom du massif" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="ma_geom" nullable="true" remarks="Coordonnées géométriques du massif" size="2147483647" type="geometry"/>
+         <primaryKey column="ma_id" sequenceNumberInPK="1"/>
+         <index name="asm_massif_pkey" unique="true">
+            <column ascending="true" name="ma_id"/>
+         </index>
+      </table>
+      <table name="asm_moyen_engage" numRows="0" remarks="Moyen engagé pour une alerte en particulier" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="mo_id" nullable="false" remarks="Clé primaire, identifiant du duo alerte-moyen engagé" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="mo_fk_alerte_general_id" nullable="true" remarks="Clé étrangère, ID de l'alerte associée" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_moyen_engage_mo_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="mo_fk_entite_secours_id" nullable="true" remarks="Clé étrangère, ID de l'entité de secours engagée pour la dite alerte" size="10" type="int4">
+            <parent column="es_id" foreignKey="asm_moyen_engage_mo_fk_entite_secours_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_entite_secours"/>
+         </column>
+         <primaryKey column="mo_id" sequenceNumberInPK="1"/>
+         <index name="asm_moyen_engage_pkey" unique="true">
+            <column ascending="true" name="mo_id"/>
+         </index>
+      </table>
+      <table name="asm_nationalite" numRows="0" remarks="Nationalité" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="na_id" nullable="false" remarks="Clé primaire, identifiant de la nationalité" size="10" type="int4">
+            <child column="vi_fk_nationalite_id" foreignKey="asm_victime_vi_fk_nationalite_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_victime"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="na_nom" nullable="false" remarks="Nom de la nationalité" size="256" type="varchar"/>
+         <primaryKey column="na_id" sequenceNumberInPK="1"/>
+         <index name="asm_nationalite_pkey" unique="true">
+            <column ascending="true" name="na_id"/>
+         </index>
+      </table>
+      <table name="asm_renseignement" numRows="0" remarks="Renseignements sur l'alerte (onglet'Renseignements')" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="rg_id" nullable="false" remarks="Clé primaire, identifiant des renseignements" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="rg_fk_alerte_general_id" nullable="false" remarks="Clé étrangère, ID de l'alerte associée" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_renseignement_rg_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="rg_circonstances" nullable="true" remarks="Renseignements sur les circonstances de l'accident" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="rg_sensible" nullable="true" remarks="(Booléen) Caractère sensible" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="4" name="rg_mesures_prises" nullable="true" remarks="Renseignements sur les mesures prises lors de l'accident" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="rg_mp_relevage" nullable="true" remarks="(Booléen) Mesure prise - Relevage" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="rg_mp_collier" nullable="true" remarks="(Booléen) Mesure prise - Collier" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="rg_mp_attelle" nullable="true" remarks="(Booléen) Mesure prise - Attelle" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="8" name="rg_mp_ked" nullable="true" remarks="(Booléen) Mesure prise - KED" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="9" name="rg_mp_perche" nullable="true" remarks="(Booléen) Mesure prise - Perche" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="10" name="rg_mp_treuillage" nullable="true" remarks="(Booléen) Mesure prise - Treuillage" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="11" name="rg_mp_mam" nullable="true" remarks="(Booléen) Mesure prise - Mam" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="12" name="rg_mp_o2" nullable="true" remarks="(Booléen) Mesure prise - O2" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="13" name="rg_mp_mid" nullable="true" remarks="(Booléen) Mesure prise - Mid" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="14" name="rg_fk_entite_secours_id" nullable="true" remarks="Clé étrangère, ID de la personne ayant suivi l'affaire" size="10" type="int4">
+            <parent column="es_id" foreignKey="asm_renseignement_rg_fk_entite_secours_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_entite_secours"/>
+         </column>
+         <primaryKey column="rg_id" sequenceNumberInPK="1"/>
+         <index name="asm_renseignement_pkey" unique="true">
+            <column ascending="true" name="rg_id"/>
+         </index>
+      </table>
+      <table name="asm_victime" numRows="0" remarks="Victime" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="vi_id" nullable="false" remarks="Clé primaire, identifiant de la victime" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="vi_fk_alerte_general_id" nullable="true" remarks="Clé secondaire, identifiant de l'alerte associée à la victime" size="10" type="int4">
+            <parent column="ag_id" foreignKey="asm_victime_vi_fk_alerte_general_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="asm_alerte_general"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="vi_nom" nullable="true" remarks="Nom de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="vi_prenom" nullable="true" remarks="Prénom de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="vi_sexe" nullable="true" remarks="Sexe de la victime" size="1" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="5" name="vi_naissance_date" nullable="true" remarks="Date de naissance de la victime" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="6" name="vi_naissance_lieu" nullable="true" remarks="Lieu de naissance de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="vi_fk_nationalite_id" nullable="true" remarks="Nationalité de la victime" size="10" type="int4">
+            <parent column="na_id" foreignKey="asm_victime_vi_fk_nationalite_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_nationalite"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="vi_filiation" nullable="true" remarks="Noms et prénoms de la famille de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="vi_adresse" nullable="true" remarks="Adresse de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="vi_fk_commune_id" nullable="true" remarks="Clé étrangère, commune d'habitation" size="10" type="int4">
+            <parent column="co_id" foreignKey="asm_victime_vi_fk_commune_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_commune"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="11" name="vi_telephone" nullable="true" remarks="Téléphone de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="12" name="vi_profession" nullable="true" remarks="Profession de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="13" name="vi_fk_etat_clinique_id" nullable="true" remarks="Clé étrangère, identifiant de l'état clinique" size="10" type="int4">
+            <parent column="ec_id" foreignKey="asm_victime_vi_fk_etat_clinique_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_etat_clinique"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="14" name="vi_blessures" nullable="true" remarks="Liste des blessures de la victime" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="15" name="vi_fk_lieu_evacuation_id" nullable="true" remarks="Clé étrangère, ID du lieu d'évacuation" size="10" type="int4">
+            <parent column="le_id" foreignKey="asm_victime_vi_fk_lieu_evacuation_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="asm_lieu_evacuation"/>
+         </column>
+         <primaryKey column="vi_id" sequenceNumberInPK="1"/>
+         <index name="asm_victime_pkey" unique="true">
+            <column ascending="true" name="vi_id"/>
+         </index>
+      </table>
+      <table name="asm_zone_geographique" numRows="0" remarks="Zone géographique" schema="public" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="zg_id" nullable="false" remarks="Clé primaire, identifiant de la zone géographique" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="zg_nom" nullable="false" remarks="Nom de la zone géographique" size="100" type="varchar"/>
+         <primaryKey column="zg_id" sequenceNumberInPK="1"/>
+         <index name="asm_zone_geographique_pkey" unique="true">
+            <column ascending="true" name="zg_id"/>
+         </index>
+      </table>
+      <table name="geography_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS f_table_catalog,&#10;    n.nspname AS f_table_schema,&#10;    c.relname AS f_table_name,&#10;    a.attname AS f_geography_column,&#10;    postgis_typmod_dims(a.atttypmod) AS coord_dimension,&#10;    postgis_typmod_srid(a.atttypmod) AS srid,&#10;    postgis_typmod_type(a.atttypmod) AS type&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n&#10;  WHERE ((t.typname = 'geography'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND (c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="f_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="1" name="f_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="f_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="f_geography_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="coord_dimension" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="srid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="spatial_ref_sys"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="type" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="geometry_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT (current_database())::character varying(256) AS f_table_catalog,&#10;    n.nspname AS f_table_schema,&#10;    c.relname AS f_table_name,&#10;    a.attname AS f_geometry_column,&#10;    COALESCE(postgis_typmod_dims(a.atttypmod), sn.ndims, 2) AS coord_dimension,&#10;    COALESCE(NULLIF(postgis_typmod_srid(a.atttypmod), 0), sr.srid, 0) AS srid,&#10;    (replace(replace(COALESCE(NULLIF(upper(postgis_typmod_type(a.atttypmod)), 'GEOMETRY'::text), st.type, 'GEOMETRY'::text), 'ZM'::text, ''::text), 'Z'::text, ''::text))::character varying(30) AS type&#10;   FROM ((((((pg_class c&#10;     JOIN pg_attribute a ON (((a.attrelid = c.oid) AND (NOT a.attisdropped))))&#10;     JOIN pg_namespace n ON ((c.relnamespace = n.oid)))&#10;     JOIN pg_type t ON ((a.atttypid = t.oid)))&#10;     LEFT JOIN ( SELECT s.connamespace,&#10;            s.conrelid,&#10;            s.conkey,&#10;            replace(split_part(s.consrc, ''''::text, 2), ')'::text, ''::text) AS type&#10;           FROM pg_constraint s&#10;          WHERE (s.consrc ~~* '%geometrytype(% = %'::text)) st ON (((st.connamespace = n.oid) AND (st.conrelid = c.oid) AND (a.attnum = ANY (st.conkey)))))&#10;     LEFT JOIN ( SELECT s.connamespace,&#10;            s.conrelid,&#10;            s.conkey,&#10;            (replace(split_part(s.consrc, ' = '::text, 2), ')'::text, ''::text))::integer AS ndims&#10;           FROM pg_constraint s&#10;          WHERE (s.consrc ~~* '%ndims(% = %'::text)) sn ON (((sn.connamespace = n.oid) AND (sn.conrelid = c.oid) AND (a.attnum = ANY (sn.conkey)))))&#10;     LEFT JOIN ( SELECT s.connamespace,&#10;            s.conrelid,&#10;            s.conkey,&#10;            (replace(replace(split_part(s.consrc, ' = '::text, 2), ')'::text, ''::text), '('::text, ''::text))::integer AS srid&#10;           FROM pg_constraint s&#10;          WHERE (s.consrc ~~* '%srid(% = %'::text)) sr ON (((sr.connamespace = n.oid) AND (sr.conrelid = c.oid) AND (a.attnum = ANY (sr.conkey)))))&#10;  WHERE ((c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT (c.relname = 'raster_columns'::name)) AND (t.typname = 'geometry'::name) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="f_table_catalog" nullable="true" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="f_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="f_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="f_geometry_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="coord_dimension" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="srid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="spatial_ref_sys"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="type" nullable="true" remarks="" size="30" type="varchar"/>
+      </table>
+      <table name="raster_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS r_table_catalog,&#10;    n.nspname AS r_table_schema,&#10;    c.relname AS r_table_name,&#10;    a.attname AS r_raster_column,&#10;    COALESCE(_raster_constraint_info_srid(n.nspname, c.relname, a.attname), ( SELECT st_srid('010100000000000000000000000000000000000000'::geometry) AS st_srid)) AS srid,&#10;    _raster_constraint_info_scale(n.nspname, c.relname, a.attname, 'x'::bpchar) AS scale_x,&#10;    _raster_constraint_info_scale(n.nspname, c.relname, a.attname, 'y'::bpchar) AS scale_y,&#10;    _raster_constraint_info_blocksize(n.nspname, c.relname, a.attname, 'width'::text) AS blocksize_x,&#10;    _raster_constraint_info_blocksize(n.nspname, c.relname, a.attname, 'height'::text) AS blocksize_y,&#10;    COALESCE(_raster_constraint_info_alignment(n.nspname, c.relname, a.attname), false) AS same_alignment,&#10;    COALESCE(_raster_constraint_info_regular_blocking(n.nspname, c.relname, a.attname), false) AS regular_blocking,&#10;    _raster_constraint_info_num_bands(n.nspname, c.relname, a.attname) AS num_bands,&#10;    _raster_constraint_info_pixel_types(n.nspname, c.relname, a.attname) AS pixel_types,&#10;    _raster_constraint_info_nodata_values(n.nspname, c.relname, a.attname) AS nodata_values,&#10;    _raster_constraint_info_out_db(n.nspname, c.relname, a.attname) AS out_db,&#10;    _raster_constraint_info_extent(n.nspname, c.relname, a.attname) AS extent,&#10;    COALESCE(_raster_constraint_info_index(n.nspname, c.relname, a.attname), false) AS spatial_index&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n&#10;  WHERE ((t.typname = 'raster'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND (c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="r_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="1" name="r_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="r_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="r_raster_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="srid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="spatial_ref_sys"/>
+         </column>
+         <column autoUpdated="false" digits="17" id="5" name="scale_x" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="6" name="scale_y" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="7" name="blocksize_x" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="8" name="blocksize_y" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="9" name="same_alignment" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="10" name="regular_blocking" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="11" name="num_bands" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="12" name="pixel_types" nullable="true" remarks="" size="2147483647" type="_text"/>
+         <column autoUpdated="false" digits="17" id="13" name="nodata_values" nullable="true" remarks="" size="17" type="_float8"/>
+         <column autoUpdated="false" digits="0" id="14" name="out_db" nullable="true" remarks="" size="1" type="_bool"/>
+         <column autoUpdated="false" digits="0" id="15" name="extent" nullable="true" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="16" name="spatial_index" nullable="true" remarks="" size="1" type="bool"/>
+      </table>
+      <table name="raster_overviews" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS o_table_catalog,&#10;    n.nspname AS o_table_schema,&#10;    c.relname AS o_table_name,&#10;    a.attname AS o_raster_column,&#10;    current_database() AS r_table_catalog,&#10;    (split_part(split_part(s.consrc, '''::name'::text, 1), ''''::text, 2))::name AS r_table_schema,&#10;    (split_part(split_part(s.consrc, '''::name'::text, 2), ''''::text, 2))::name AS r_table_name,&#10;    (split_part(split_part(s.consrc, '''::name'::text, 3), ''''::text, 2))::name AS r_raster_column,&#10;    (btrim(split_part(s.consrc, ','::text, 2)))::integer AS overview_factor&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n,&#10;    pg_constraint s&#10;  WHERE ((t.typname = 'raster'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND ((c.relkind)::text = ANY ((ARRAY['r'::character(1), 'v'::character(1), 'm'::character(1), 'f'::character(1)])::text[])) AND (s.connamespace = n.oid) AND (s.conrelid = c.oid) AND (s.consrc ~~ '%_overview_constraint(%'::text) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="o_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="1" name="o_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="o_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="o_raster_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="r_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="5" name="r_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="6" name="r_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="7" name="r_raster_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="8" name="overview_factor" nullable="true" remarks="" size="10" type="int4"/>
+      </table>
+      <table name="spatial_ref_sys" numRows="5757" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="srid" nullable="false" remarks="" size="10" type="int4">
+            <child column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="geography_columns"/>
+            <child column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="geometry_columns"/>
+            <child column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="raster_columns"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="auth_name" nullable="true" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="auth_srid" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="3" name="srtext" nullable="true" remarks="" size="2048" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="proj4text" nullable="true" remarks="" size="2048" type="varchar"/>
+         <primaryKey column="srid" sequenceNumberInPK="1"/>
+         <index name="spatial_ref_sys_pkey" unique="true">
+            <column ascending="true" name="srid"/>
+         </index>
+      </table>
+   </tables>
+</database>
